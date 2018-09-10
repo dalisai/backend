@@ -343,9 +343,8 @@ CREATE TABLE `item_details` (
 --
 -- Table structure for table `items`
 --
-
 CREATE TABLE `items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemcode` varchar(45) NOT NULL,
   `longdescription` varchar(45) DEFAULT NULL,
   `shortdescription` varchar(20) NOT NULL,
@@ -355,16 +354,22 @@ CREATE TABLE `items` (
   `supplierid` bigint(20) DEFAULT NULL,
   `largepacking` bigint(20) DEFAULT NULL,
   `withserial` int(11) DEFAULT NULL,
-  `withexpiry` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `withexpiry` int(11) DEFAULT NULL,
+  `vatable` tinyint(4) DEFAULT NULL,
+  `OpenDept` tinyint(4) DEFAULT NULL,
+  `isOpenDept` tinyint(4) DEFAULT NULL,
+  `isOpenPrice` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ItemCode_UNIQUE` (`itemcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `new_table`
+-- Table structure for table `zmode`
 --
 
-CREATE TABLE `new_table` (
+CREATE TABLE `zmode` (
   `id` int(11) NOT NULL,
   `sales` decimal(10,0) DEFAULT NULL,
   `salesqty` decimal(10,0) DEFAULT NULL,
@@ -845,9 +850,9 @@ ALTER TABLE `items`
   ADD UNIQUE KEY `ItemCode_UNIQUE` (`itemcode`);
 
 --
--- Indexes for table `new_table`
+-- Indexes for table `zmode`
 --
-ALTER TABLE `new_table`
+ALTER TABLE `zmode`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1011,9 +1016,9 @@ ALTER TABLE `item_details`
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `new_table`
+-- AUTO_INCREMENT for table `zmode`
 --
-ALTER TABLE `new_table`
+ALTER TABLE `zmode`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order1`

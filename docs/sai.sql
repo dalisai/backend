@@ -358,10 +358,8 @@ CREATE TABLE `items` (
   `vatable` tinyint(4) DEFAULT NULL,
   `OpenDept` tinyint(4) DEFAULT NULL,
   `isOpenDept` tinyint(4) DEFAULT NULL,
-  `isOpenPrice` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `ItemCode_UNIQUE` (`itemcode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+  `isOpenPrice` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

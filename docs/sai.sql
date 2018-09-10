@@ -344,7 +344,7 @@ CREATE TABLE `item_details` (
 -- Table structure for table `items`
 --
 CREATE TABLE `items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `itemcode` varchar(45) NOT NULL,
   `longdescription` varchar(45) DEFAULT NULL,
   `shortdescription` varchar(20) NOT NULL,

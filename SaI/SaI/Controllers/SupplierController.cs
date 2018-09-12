@@ -1,0 +1,133 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using SaI.Models;
+using SaI.Helpers;
+using SP = MySql.Data.MySqlClient.MySqlParameter;
+namespace SaI.Controllers
+{
+    public class SupplierController : Controller
+    {
+        List<Supplier> SupplierList = new List<Supplier>();
+        Supplier supplier = new Supplier();
+
+        // GET: Supplier
+        public ActionResult Index()
+        {
+            using (var supplier = DBHelper.ExecuteReader(@"
+Select * 
+From Supplier")){
+
+                while (supplier.Read()) {
+                    var dataSupplier = new Supplier() {
+                        SupplierID = DBHelper.GetInt32(supplier, 0),
+                        Description = DBHelper.GetString(supplier, 1).ToString()
+                    };
+                    SupplierList.Add(dataSupplier);
+                }
+            }
+            return View(SupplierList);
+        }
+
+
+        // GET: Supplier/Create
+        public ActionResult Create() {
+            return View();
+        }
+
+        // POST: Supplier/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Supplier supplier) {
+            if (ModelState.IsValid) {
+                var query = string.Format(
+                    @"
+INSERT INTO Supplier (Description) 
+VALUES (@Description)");
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@Description", supplier.Description));
+            }
+            return View(supplier);
+        }
+
+        // GET: Supplier/Edit/5
+        public ActionResult Edit(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var query = @"
+Select * 
+FROM Supplier
+Where SupplierID = @SupplierID";
+            var reader = DBHelper.ExecuteReader(query, new SP("@SupplierID", id));
+            if (reader.Read()) {
+                supplier = new Supplier() {
+                      SupplierID = DBHelper.GetInt32(reader, 0),
+                      Description = DBHelper.GetString(reader, 1)
+                };
+            }
+            else {
+                return HttpNotFound();
+            }
+            return View(supplier);
+        }
+
+        // POST: Supplier/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Supplier supplier) {
+            if (ModelState.IsValid) {
+                var query = string.Format(
+        @"
+UPDATE Supplier 
+SET Description = @Description
+Where SupplierID = @SupplierID");
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@SupplierID", supplier.SupplierID),
+                    new SP("@Description", supplier.Description));
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Supplier/Delete/5
+        public ActionResult Delete(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var query = @"
+Select * 
+FROM Supplier
+Where SupplierID = @SupplierID";
+            var reader = DBHelper.ExecuteReader(query, new SP("@SupplierID", id));
+            if (reader.Read()) {
+                supplier = new Supplier() {
+                    SupplierID = DBHelper.GetInt32(reader, 0),
+                    Description = DBHelper.GetString(reader, 1)
+                };
+            }
+            else {
+                return HttpNotFound();
+            }
+            return View(supplier);
+        }
+
+        // POST: Supplier/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id) {
+            var query = string.Format(
+@"
+DELETE FROM Supplier 
+Where SupplierID = @SupplierID");
+            DBHelper.ExecuteNonQuery(query,
+                new SP("@SupplierID", id));
+            return RedirectToAction("Index");
+        }
+
+    }
+}

@@ -13,7 +13,8 @@ namespace SaI.Repositories.Sql
         {
             var items = new List<Item>();
             string query = @"
-SELECT itemcode, 
+SELECT id, 
+    itemcode, 
     longdescription, 
     shortdescription, 
     departmentid, 
@@ -30,19 +31,20 @@ FROM items";
             var rs = DBHelper.ExecuteReader(query, new MySql.Data.MySqlClient.MySqlParameter());
             while (rs.Read()) {
                 var item = new Item {
-                     ItemCode = DBHelper.GetString(rs, 0),
-                     LongDescription = DBHelper.GetString(rs, 1),
-                     ShortDescription = DBHelper.GetString(rs, 2),
-                     DepartmentID = DBHelper.GetInt32(rs, 3), 
-                     CategoryID = DBHelper.GetInt32(rs, 4),
-                     SubCategoryID = DBHelper.GetInt32(rs, 5),
-                     SupplierID = DBHelper.GetInt32(rs, 6),
-                     LargePacking = DBHelper.GetString(rs, 7),
-                     WithSerial = DBHelper.GetBoolean(rs, 8),
-                     WithExpiry = DBHelper.GetBoolean(rs, 9),
-                     IsVatable = DBHelper.GetBoolean(rs, 10),
-                     IsInOpenDepartment = DBHelper.GetBoolean(rs, 11),
-                     IsOpenPrice = DBHelper.GetBoolean(rs, 12)
+                    ID = DBHelper.GetInt32(rs, 0),
+                    ItemCode = DBHelper.GetString(rs, 1),
+                    LongDescription = DBHelper.GetString(rs, 2),
+                    ShortDescription = DBHelper.GetString(rs, 3),
+                    DepartmentID = DBHelper.GetInt32(rs, 4), 
+                    CategoryID = DBHelper.GetInt32(rs, 5),
+                    SubCategoryID = DBHelper.GetInt32(rs, 6),
+                    SupplierID = DBHelper.GetInt32(rs, 7),
+                    LargePacking = DBHelper.GetString(rs, 8),
+                    WithSerial = DBHelper.GetBoolean(rs, 9),
+                    WithExpiry = DBHelper.GetBoolean(rs, 10),
+                    IsVatable = DBHelper.GetBoolean(rs, 11),
+                    IsInOpenDepartment = DBHelper.GetBoolean(rs, 12),
+                    IsOpenPrice = DBHelper.GetBoolean(rs, 13)
                 };
                 items.Add(item);
             }

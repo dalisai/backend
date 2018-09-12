@@ -154,6 +154,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SampleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -405,6 +406,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Items\AddItem.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\Sample\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

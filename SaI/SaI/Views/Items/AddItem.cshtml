@@ -1,0 +1,129 @@
+﻿@section Items{
+    <link rel="stylesheet" href="~/Content/bower_components/select2/dist/css/select2.min.css">
+    }
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- SELECT2 EXAMPLE -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Item Master</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Long Description</label>
+                        <input class="form-control" type="text" placeholder="Input Long Description" />
+                    </div>
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <input class="form-control" type="text" placeholder="Input Short Description (max 20 characters)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Department Name</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Department 0</option>
+                            <option>Department 1</option>
+                            <option>Department 2</option>
+                            <option>Department 3</option>
+                            <option>Department 4</option>
+                            <option>Department 5</option>
+                            <option>Department 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Name</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Category 0</option>
+                            <option>Category 1</option>
+                            <option>Category 2</option>
+                            <option>Category 3</option>
+                            <option>Category 4</option>
+                            <option>Category 5</option>
+                            <option>Category 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sub-Category Name</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Sub-Category 0</option>
+                            <option>Sub-Category 1</option>
+                            <option>Sub-Category 2</option>
+                            <option>Sub-Category 3</option>
+                            <option>Sub-Category 4</option>
+                            <option>Sub-Category 5</option>
+                            <option>Sub-Category 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier Name</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Supplier 0</option>
+                            <option>Supplier 1</option>
+                            <option>Supplier 2</option>
+                            <option>Supplier 3</option>
+                            <option>Supplier 4</option>
+                            <option>Supplier 5</option>
+                            <option>Supplier 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Large Packing</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Packing 0</option>
+                            <option>Packing 1</option>
+                            <option>Packing 2</option>
+                            <option>Packing 3</option>
+                            <option>Packing 4</option>
+                            <option>Packing 5</option>
+                            <option>Packing 6</option>
+                        </select>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />Vatable
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />Open Price
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />Open Department
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />With Serial
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" />With Expiry
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    @*Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+            the plugin.*@
+                    <button type="submit" class="btn btn-info">Save</button>&nbsp;
+                    <button type="submit" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ItemsScript{
+<script src="~/Content/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+</script>
+}

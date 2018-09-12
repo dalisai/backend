@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="~/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    @RenderSection("Items", required: false)
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -371,17 +372,10 @@
                         </a>
                     </li>*@
                     <li class="treeview">
-                        <a href="#">
+                        <a href="#" onclick="location.href='@Url.Action("Index", "Items")'">
                             <i class="fa fa-pie-chart"></i>
                             <span>Items</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Items Master</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Items Details</a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
@@ -541,7 +535,7 @@
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io/">Almsaeed Studio</a>.</strong> All rights
+            <strong>Copyright &copy; 2018-2018 <a href="http://digitalexcellencegroup.com">Digital Excellence Group</a>.</strong> All rights
             reserved.
         </footer>
         <!-- Control Sidebar -->
@@ -752,5 +746,6 @@
     <script src="~/Content/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/dist/js/demo.js"></script>
+    @RenderSection("ItemsScript", required: false)
 </body>
 </html>

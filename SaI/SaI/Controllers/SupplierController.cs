@@ -36,21 +36,23 @@ From Supplier")){
 
 
         // GET: Supplier/Create
-        public ActionResult Create() {
+        public ActionResult Add() {
             return View();
         }
 
         // POST: Supplier/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Supplier supplier) {
+        public ActionResult Add(Supplier supplier) {
             if (ModelState.IsValid) {
-                var query = string.Format(
+                if (supplier.Description != null) {
+                    var query = string.Format(
                     @"
 INSERT INTO Supplier (Description) 
 VALUES (@Description)");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@Description", supplier.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@Description", supplier.Description));
+                }
             }
             return View(supplier);
         }
@@ -82,14 +84,16 @@ Where SupplierID = @SupplierID";
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Supplier supplier) {
             if (ModelState.IsValid) {
-                var query = string.Format(
+                if (supplier.Description != null) {
+                    var query = string.Format(
         @"
 UPDATE Supplier 
 SET Description = @Description
 Where SupplierID = @SupplierID");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@SupplierID", supplier.SupplierID),
-                    new SP("@Description", supplier.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@SupplierID", supplier.SupplierID),
+                        new SP("@Description", supplier.Description));
+                }
             }
             return RedirectToAction("Index");
         }
@@ -120,12 +124,14 @@ Where SupplierID = @SupplierID";
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            var query = string.Format(
+            if (id != 0) {
+                var query = string.Format(
 @"
 DELETE FROM Supplier 
 Where SupplierID = @SupplierID");
-            DBHelper.ExecuteNonQuery(query,
-                new SP("@SupplierID", id));
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@SupplierID", id));
+            }
             return RedirectToAction("Index");
         }
 

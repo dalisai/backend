@@ -1,7 +1,7 @@
 ﻿
-@model SaI.Models.Category
+@model SaI.Models.Supplier
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Add";
 }
 
 @using (Html.BeginForm()) {
@@ -9,7 +9,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Create Category</h3>
+        <h3 class="box-title">Create Supplier</h3>
     </div>
     <form role="form">
         <div class="box-body">
@@ -23,7 +23,7 @@
         </div>
         <div class="box-footer">
             <input type="submit" value="Add" class="btn btn-primary" /> &nbsp;&nbsp;&nbsp;
-            <a href="/Category/Index" class="btn btn-default">Back to List</a>
+            <a href="/Supplier/Index" class="btn btn-default">Back to List</a>
         </div>
     </form>
 </div>

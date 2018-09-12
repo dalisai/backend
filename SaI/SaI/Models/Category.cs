@@ -6,14 +6,10 @@ namespace SaI.Models
 {
     public class Category
     {
-
         [NotMapped]
         public int CategoryID { get; set; }
 
         [DisplayName("Description")]
         public string Description { get; set; }
- 
-
-     
     }
 }

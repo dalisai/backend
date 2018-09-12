@@ -38,21 +38,23 @@ From SubCategory")){
 
 
         // GET: SubCategory/Create
-        public ActionResult Create() {
+        public ActionResult Add() {
             return View();
         }
 
         // POST: SubCategory/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SubCategory subcategory) {
+        public ActionResult Add(SubCategory subcategory) {
             if (ModelState.IsValid) {
-                var query = string.Format(
+                if (subcategory.Description != null) {
+                    var query = string.Format(
                     @"
 INSERT INTO SubCategory (Description) 
 VALUES (@Description)");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@Description", subcategory.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@Description", subcategory.Description));
+                }
             }
             return View(subcategory);
         }
@@ -84,13 +86,15 @@ Where SubCategoryID = @SubCategoryID";
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SubCategory subcategory) {
             if (ModelState.IsValid) {
-                var query = string.Format(@"
+                if (subcategory.Description != null) {
+                    var query = string.Format(@"
 UPDATE SubCategory
 SET Description = @Description
 Where SubCategoryID = @SubCategoryID");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@SubCategoryID", subcategory.SubCategoryID),
-                    new SP("@Description", subcategory.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@SubCategoryID", subcategory.SubCategoryID),
+                        new SP("@Description", subcategory.Description));
+                }
             }
             return RedirectToAction("Index");
         }
@@ -121,12 +125,15 @@ Where SubCategoryID = @SubCategoryID";
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            var query = string.Format( @"
+            if (id != 0) {
+                var query = string.Format(@"
 DELETE FROM SubCategory 
 Where SubCategoryID = @SubCategoryID");
-            DBHelper.ExecuteNonQuery(query,
-                new SP("@SubCategoryID", id));
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@SubCategoryID", id));
+            }
             return RedirectToAction("Index");
+         
         }
 
     }

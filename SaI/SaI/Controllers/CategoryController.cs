@@ -34,7 +34,6 @@ From Category")){
             return View(CategoryList);
         }
 
-
         // GET: Category/Create
         public ActionResult Add() {
             return View();
@@ -44,13 +43,17 @@ From Category")){
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Category category) {
-            if (ModelState.IsValid) {
-                var query = string.Format(@"
+
+            if (category.Description != null) {
+                if (ModelState.IsValid) {
+                    var query = string.Format(@"
 INSERT INTO CATEGORY (Description) 
 VALUES (@Description)");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@Description", category.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@Description", category.Description));
+                }
             }
+
             return View(category);
         }
 
@@ -81,13 +84,15 @@ Where CategoryID = @CategoryID";
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category) {
             if (ModelState.IsValid) {
-                var query = string.Format(@"
+                if (category.Description != null) {
+                    var query = string.Format(@"
 UPDATE CATEGORY 
 SET Description = @Description
 Where CategoryID = @CategoryID");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@CategoryID", category.CategoryID),
-                    new SP("@Description", category.Description));
+                    DBHelper.ExecuteNonQuery(query,
+                        new SP("@CategoryID", category.CategoryID),
+                        new SP("@Description", category.Description));
+                }
             }
             return RedirectToAction("Index");
         }
@@ -118,11 +123,13 @@ Where CategoryID = @CategoryID";
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            var query = string.Format(@"
+            if (id != 0) {
+                var query = string.Format(@"
 DELETE FROM CATEGORY 
 Where CategoryID = @CategoryID");
-            DBHelper.ExecuteNonQuery(query,
-                new SP("@CategoryID", id));
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@CategoryID", id));                             
+            }
             return RedirectToAction("Index");
         }
 

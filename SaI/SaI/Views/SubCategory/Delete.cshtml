@@ -1,7 +1,7 @@
 ﻿
-@model SaI.Models.Category
+@model SaI.Models.SubCategory
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Delete";
 }
 @using (Html.BeginForm()){
     @Html.AntiForgeryToken()
@@ -9,12 +9,12 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Delete  Category</h3>
+        <h3 class="box-title">Delete  SubCategory</h3>
     </div>
 
     <h3 style="color:red;">Are you sure you want to delete this?</h3><br /><br />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.CategoryID)
+    @Html.HiddenFor(model => model.SubCategoryID)
     <form role="form">
         <div class="box-body">
             <div class="form-group">
@@ -27,7 +27,7 @@
         </div>
         <div class="box-footer">
                 <input type="submit" value="Delete" class="btn btn-danger" /> &nbsp;&nbsp;&nbsp;
-                <a href="/Category/Index" class="btn btn-default">Back to List</a>
+                <a href="/SubCategory/Index" class="btn btn-default">Back to List</a>
         </div>
     </form>
 </div>

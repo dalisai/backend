@@ -86,5 +86,21 @@ Where ID = @ID");
             catch (Exception ex) { }
             return false;
         }
+
+        public Boolean RemoveDepartment(int id) {
+            
+
+            try
+            {
+                var query = string.Format(@"
+DELETE FROM DEPT 
+Where ID = @ID");
+                DBHelper.ExecuteNonQuery(query,
+                    new SP("@ID", id));
+                return true;
+            }
+            catch (Exception ex) { }
+            return false;
+        }
     }
 }

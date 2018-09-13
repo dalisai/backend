@@ -48,8 +48,6 @@ namespace SaI.Controllers
                 var dept = departmentRepo.FindDepartment((int)id);
                 return View(dept);
             }
-
-            return HttpNotFound();
         }
 
         // POST: Category/Edit/5
@@ -59,6 +57,33 @@ namespace SaI.Controllers
         {
             if (ModelState.IsValid){
                 departmentRepo.UpdateDepartment(department);                
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Category/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var dept = departmentRepo.FindDepartment((int)id);
+                return View(dept);
+            }
+            
+        }
+
+        // POST: Category/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                departmentRepo.RemoveDepartment(id);
             }
             return RedirectToAction("Index");
         }

@@ -352,7 +352,7 @@ CREATE TABLE `items` (
   `categoryid` bigint(20) DEFAULT NULL,
   `subcategoryid` bigint(20) DEFAULT NULL,
   `supplierid` bigint(20) DEFAULT NULL,
-  `largepacking` bigint(20) DEFAULT NULL,
+  `largepacking` varchar(50) DEFAULT NULL,
   `withserial` int(11) DEFAULT NULL,
   `withexpiry` int(11) DEFAULT NULL,
   `vatable` tinyint(4) DEFAULT NULL,

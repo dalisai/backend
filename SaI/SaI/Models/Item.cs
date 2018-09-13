@@ -7,6 +7,7 @@ namespace SaI.Models
 {
     public class Item
     {
+        public int ID { get; set; }
         public string ItemCode { get; set; }
         public string LongDescription { get; set; }
         public string ShortDescription { get; set; }

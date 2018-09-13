@@ -26,6 +26,33 @@ USE `sai`;
 
 -- --------------------------------------------------------
 
+
+--
+-- Table structure for table `Category`
+--
+create table Category (
+ CategoryID int unsigned not null auto_increment primary key,
+ Description varchar(500) not null
+);
+
+
+--
+-- Table structure for table `SubCategory`
+--
+create table  SubCategory (
+ SubCategoryID int unsigned not null auto_increment primary key,
+ Description varchar(500) not null
+);
+
+
+--
+-- Table structure for table `Supplier`
+--
+create table Supplier (
+ SupplierID int unsigned not null auto_increment primary key,
+ Description varchar(500) not null
+);
+
 --
 -- Table structure for table `attendance`
 --

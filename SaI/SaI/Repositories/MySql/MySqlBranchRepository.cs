@@ -6,9 +6,9 @@ using SaI.Models;
 using SaI.Helpers;
 using SP = MySql.Data.MySqlClient.MySqlParameter;
 
-namespace SaI.Repositories.Sql
+namespace SaI.Repositories.MySql
 {
-    public class SqlBranchRepository
+    public class MySqlBranchRepository
     {
         public List<Branch> FindBranch()
         {

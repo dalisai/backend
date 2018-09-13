@@ -6,8 +6,7 @@ namespace SaI.Models
 {
     public class Supplier
     {
-        [NotMapped]
-        public int SupplierID { get; set; }
+        public int ID { get; set; }
 
         [DisplayName("Description")]
         public string Description { get; set; }

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using SaI.Models;
 using SaI.Helpers;
+using MySql.Data.MySqlClient;
+using SP = MySql.Data.MySqlClient.MySqlParameter;
 
-namespace SaI.Repositories.Sql
+namespace SaI.Repositories.MySql
 {
-    public class SqlItemRepository
+    public class MySqlItemRepository
     {
         public List<Item> FindItems()
         {
@@ -28,7 +30,7 @@ SELECT id,
     isOpenDept, 
     isOpenPrice 
 FROM items";
-            var rs = DBHelper.ExecuteReader(query, new MySql.Data.MySqlClient.MySqlParameter());
+            var rs = DBHelper.ExecuteReader(query);
             while (rs.Read()) {
                 var item = new Item {
                     ID = DBHelper.GetInt32(rs, 0),

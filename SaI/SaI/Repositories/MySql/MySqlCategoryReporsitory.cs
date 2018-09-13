@@ -6,94 +6,78 @@ using SaI.Helpers;
 using SaI.Models;
 using SP = MySql.Data.MySqlClient.MySqlParameter;
 
-namespace SaI.Repositories.Sql
+namespace SaI.Repositories.MySql
 {
-    public class SqlDepartmentRepository
+    public class MySqlCategoryRepository
     {
-        public List<Department> FindDepartments()
-        {
-            var list = new List<Department>();
+        public List<Category> FindCategories() {
+            var list = new List<Category>();
             string query = @"
 SELECT id, 
-    description, 
-    backcolor
-FROM dept";
+    description 
+FROM category";
             var rs = DBHelper.ExecuteReader(query, new SP());
             while (rs.Read()) {
-                var item = new Department {
-                     ID = DBHelper.GetInt32(rs, 0),
-                     Description = DBHelper.GetString(rs, 1),
-                     BackColor = DBHelper.GetString(rs, 2)
+                var item = new Category {
+                    ID = DBHelper.GetInt32(rs, 0),
+                    Description = DBHelper.GetString(rs, 1),
+                   
                 };
                 list.Add(item);
             }
             return list;
         }
 
-        public Department FindDepartment(int id)
-        {
+        public Category FindCategory(int id) {
             string query = @"
 SELECT id, 
-    description, 
-    backcolor
-FROM dept
+    description 
+FROM category
 WHERE id = @ID";
             var rs = DBHelper.ExecuteReader(query, new SP("@ID", id));
-            while (rs.Read())
-            {
-                var item = new Department
-                {
+            while (rs.Read()) {
+                var item = new Category {
                     ID = DBHelper.GetInt32(rs, 0),
                     Description = DBHelper.GetString(rs, 1),
-                    BackColor = DBHelper.GetString(rs, 2)
                 };
                 return item;
             }
             return null;
         }
 
-        public Boolean SaveDepartment(Department department) {
-
+        public Boolean SaveCategory(Category category) {
             try {
                 var query = string.Format(@"
-INSERT INTO DEPT(description, backcolor) 
-VALUES (@Description, @BackColor)");
+INSERT INTO Category(description) 
+VALUES (@Description)");
                 DBHelper.ExecuteNonQuery(query,
-                    new SP("@Description", department.Description),
-                    new SP("@BackColor", department.BackColor));
-
+                    new SP("@Description", category.Description));
                 return true;
             }
             catch (Exception ex) { }
             return false;
-            
+
         }
 
-        public Boolean UpdateDepartment(Department department) {
-            try
-            {
+        public Boolean UpdateCategory(Category category) {
+            try {
                 var query = string.Format(@"
-UPDATE Dept 
-SET Description = @Description, BackColor = @BackColor
+UPDATE Category 
+SET Description = @Description
 Where ID = @ID");
                 DBHelper.ExecuteNonQuery(query,
-                    new SP("@Description", department.Description),
-                    new SP("@BackColor", department.BackColor),
-                    new SP("@ID", department.ID));
-
+                    new SP("@Description", category.Description),
+                    new SP("@ID", category.ID));
                 return true;
             }
             catch (Exception ex) { }
             return false;
         }
 
-        public Boolean RemoveDepartment(int id) {
-            
-
-            try
-            {
+        public Boolean RemoveCategory(int id) {
+            try {
                 var query = string.Format(@"
-DELETE FROM DEPT 
+DELETE FROM Category 
 Where ID = @ID");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@ID", id));

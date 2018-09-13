@@ -9,32 +9,19 @@ using System.Web.Mvc;
 using SaI.Models;
 using SaI.Helpers;
 using SP = MySql.Data.MySqlClient.MySqlParameter;
+using SaI.Repositories.MySql;
 namespace SaI.Controllers
 {
     public class SupplierController : Controller
     {
-        List<Supplier> SupplierList = new List<Supplier>();
-        Supplier supplier = new Supplier();
-
+        MySqlSupplierRepository supplierRepo = new MySqlSupplierRepository();
         // GET: Supplier
         public ActionResult Index()
         {
-            using (var supplier = DBHelper.ExecuteReader(@"
-Select * 
-From Supplier")){
-
-                while (supplier.Read()) {
-                    var dataSupplier = new Supplier() {
-                        SupplierID = DBHelper.GetInt32(supplier, 0),
-                        Description = DBHelper.GetString(supplier, 1).ToString()
-                    };
-                    SupplierList.Add(dataSupplier);
-                }
-            }
+            var suppliers = supplierRepo.FindSuppliers();
             ViewData["success_message"] = TempData["success_message"];
-            return View(SupplierList);
+            return View(suppliers);
         }
-
 
         // GET: Supplier/Create
         public ActionResult Add() {
@@ -45,19 +32,16 @@ From Supplier")){
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Supplier supplier) {
-            if (ModelState.IsValid) {
-                if (supplier.Description != null) {
-                    var query = string.Format(
-                    @"
-INSERT INTO Supplier (Description) 
-VALUES (@Description)");
-                    DBHelper.ExecuteNonQuery(query,
-                        new SP("@Description", supplier.Description));
+
+            if (supplier.Description != null) {
+
+                if (ModelState.IsValid) {
+                    supplierRepo.SaveSupplier(supplier);
                 }
-                ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "category.";
+                ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
             }
             else {
-                ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "category.";
+                ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "supplier.";
             }
             return View(supplier);
         }
@@ -67,21 +51,10 @@ VALUES (@Description)");
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var query = @"
-Select * 
-FROM Supplier
-Where SupplierID = @SupplierID";
-            var reader = DBHelper.ExecuteReader(query, new SP("@SupplierID", id));
-            if (reader.Read()) {
-                supplier = new Supplier() {
-                      SupplierID = DBHelper.GetInt32(reader, 0),
-                      Description = DBHelper.GetString(reader, 1)
-                };
-            }
             else {
-                return HttpNotFound();
+                var supplier = supplierRepo.FindSupplier((int)id);
+                return View(supplier);
             }
-            return View(supplier);
         }
 
         // POST: Supplier/Edit/5
@@ -90,19 +63,12 @@ Where SupplierID = @SupplierID";
         public ActionResult Edit(Supplier supplier) {
             if (ModelState.IsValid) {
                 if (supplier.Description != null) {
-                    var query = string.Format(
-        @"
-UPDATE Supplier 
-SET Description = @Description
-Where SupplierID = @SupplierID");
-                    DBHelper.ExecuteNonQuery(query,
-                        new SP("@SupplierID", supplier.SupplierID),
-                        new SP("@Description", supplier.Description));
+                    supplierRepo.UpdateSupplier(supplier);
                 }
-                TempData["success_message"] = "You successfully edited" + " " + supplier.Description + " " + "category.";
+                TempData["success_message"] = "You successfully edited" + " " + supplier.Description + " " + "supplier.";
             }
             else {
-                TempData["success_message"] = "You unsuccessfully edited" + " " + supplier.Description + " " + "category.";
+                TempData["success_message"] = "You unsuccessfully edited" + " " + supplier.Description + " " + "supplier.";
             }
             return RedirectToAction("Index");
         }
@@ -112,38 +78,22 @@ Where SupplierID = @SupplierID");
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var query = @"
-Select * 
-FROM Supplier
-Where SupplierID = @SupplierID";
-            var reader = DBHelper.ExecuteReader(query, new SP("@SupplierID", id));
-            if (reader.Read()) {
-                supplier = new Supplier() {
-                    SupplierID = DBHelper.GetInt32(reader, 0),
-                    Description = DBHelper.GetString(reader, 1)
-                };
-            }
             else {
-                return HttpNotFound();
+                var supplier = supplierRepo.FindSupplier((int)id);
+                return View(supplier);
             }
-            return View(supplier);
         }
 
         // POST: Supplier/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
+        public ActionResult Delete(int id) {
             if (id != 0) {
-                var query = string.Format(
-@"
-DELETE FROM Supplier 
-Where SupplierID = @SupplierID");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@SupplierID", id));
-                TempData["success_message"] = "You successfully deleted" + " " + id + " " + "category.";
-            }
+                supplierRepo.RemoveSupplier(id);
+                TempData["success_message"] = "You successfully deleted" + " " + id + " " + "supplier.";
+            }         
             else {
-                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + "category.";
+                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + "supplier.";
             }
             return RedirectToAction("Index");
         }

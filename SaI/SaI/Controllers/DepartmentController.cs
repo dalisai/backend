@@ -5,13 +5,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SaI.Models;
-using SaI.Repositories.Sql;
+using SaI.Repositories.MySql;
 
 namespace SaI.Controllers
 {
     public class DepartmentController : Controller
     {
-        SqlDepartmentRepository departmentRepo = new SqlDepartmentRepository();
+        MySqlDepartmentRepository departmentRepo = new MySqlDepartmentRepository();
         // GET: Department
         public ActionResult Index()
         {

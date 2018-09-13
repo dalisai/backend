@@ -6,8 +6,7 @@ namespace SaI.Models
 {
     public class Category
     {
-        [NotMapped]
-        public int CategoryID { get; set; }
+        public int ID { get; set; }
 
         [DisplayName("Description")]
         public string Description { get; set; }

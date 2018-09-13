@@ -9,34 +9,19 @@ using System.Web.Mvc;
 using SaI.Models;
 using SaI.Helpers;
 using SP = MySql.Data.MySqlClient.MySqlParameter;
+using SaI.Repositories.MySql;
 namespace SaI.Controllers
 {
     public class SubCategoryController : Controller
     {
-        List<SubCategory> SubCategoryList = new List<SubCategory>();
-        SubCategory subCategory = new SubCategory();
-
+        MySqlSubCategoryRepository subcategoryRepo = new MySqlSubCategoryRepository();
         // GET: SubCategory
         public ActionResult Index()
         {
-
-            using (var subcategory = DBHelper.ExecuteReader(@"
-Select * 
-From SubCategory")){
-
-                while (subcategory.Read()) {
-
-                    var datasubcategory = new SubCategory() {
-                        SubCategoryID = DBHelper.GetInt32(subcategory, 0),
-                        Description = DBHelper.GetString(subcategory, 1).ToString()
-                    };
-                    SubCategoryList.Add(datasubcategory);
-                }
-            }
+            var subcategories = subcategoryRepo.FindSubCategories();
             ViewData["success_message"] = TempData["success_message"];
-            return View(SubCategoryList);
+            return View(subcategories);
         }
-
 
         // GET: SubCategory/Create
         public ActionResult Add() {
@@ -46,108 +31,71 @@ From SubCategory")){
         // POST: SubCategory/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(SubCategory subcategory) {
-            if (ModelState.IsValid) {
-                if (subcategory.Description != null) {
-                    var query = string.Format(
-                    @"
-INSERT INTO SubCategory (Description) 
-VALUES (@Description)");
-                    DBHelper.ExecuteNonQuery(query,
-                        new SP("@Description", subcategory.Description));
-                }
-                ViewData["success_message"] = "You successfully created" + " " + subcategory.Description + " " + "category.";
-            }
-            else {
-                ViewData["error_message"] = "You unsuccessfully created" + " " + subcategory.Description + " " + "category.";
-            }
-            return View(subcategory);
-        }
+        public ActionResult Add(SubCategory subCategory) {
 
-        // GET: SubCategory/Edit/5
-        public ActionResult Edit(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var query = @"
-Select * 
-FROM SubCategory
-Where SubCategoryID = @SubCategoryID";
-            var reader = DBHelper.ExecuteReader(query, new SP("@SubCategoryID", id));
-            if (reader.Read()) {
-                subCategory = new SubCategory() {
-                      SubCategoryID = DBHelper.GetInt32(reader, 0),
-                      Description = DBHelper.GetString(reader, 1)
-                };
+            if (subCategory.Description != null) {
+
+                if (ModelState.IsValid) {
+                    subcategoryRepo.SaveSubCategory(subCategory);
+                }
+                ViewData["success_message"] = "You successfully created" + " " + subCategory.Description + " " + "subCategory.";
             }
             else {
-                return HttpNotFound();
+                ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
             }
             return View(subCategory);
         }
 
-        // POST: SubCategory/Edit/5
+        // GET: Subcategory/Edit/5
+        public ActionResult Edit(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else {
+                var category = subcategoryRepo.FindSubCategory((int)id);
+                return View(category);
+            }
+        }
+
+        // POST: Subcategory/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SubCategory subcategory) {
             if (ModelState.IsValid) {
                 if (subcategory.Description != null) {
-                    var query = string.Format(@"
-UPDATE SubCategory
-SET Description = @Description
-Where SubCategoryID = @SubCategoryID");
-                    DBHelper.ExecuteNonQuery(query,
-                        new SP("@SubCategoryID", subcategory.SubCategoryID),
-                        new SP("@Description", subcategory.Description));
+                    subcategoryRepo.UpdateSubCategory(subcategory);
                 }
-                TempData["success_message"] = "You successfully edited" + " " + subcategory.Description + " " + "category.";
+                TempData["success_message"] = "You successfully edited" + " " + subcategory.Description + " " + "subcategory.";
             }
             else {
-                TempData["success_message"] = "You unsuccessfully edited" + " " + subcategory.Description + " " + "category.";
+                TempData["success_message"] = "You unsuccessfully edited" + " " + subcategory.Description + " " + "subcategory.";
             }
             return RedirectToAction("Index");
         }
 
-        // GET: SubCategory/Delete/5
+        // GET: Subcategory/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var query = @"
-Select * 
-FROM SubCategory
-Where SubCategoryID = @SubCategoryID";
-            var reader = DBHelper.ExecuteReader(query, new SP("@SubCategoryID", id));
-            if (reader.Read()) {
-                subCategory = new SubCategory() {
-                    SubCategoryID = DBHelper.GetInt32(reader, 0),
-                    Description = DBHelper.GetString(reader, 1)
-                };
-            }
             else {
-                return HttpNotFound();
+                var subcategory = subcategoryRepo.FindSubCategory((int)id);
+                return View(subcategory);
             }
-            return View(subCategory);
         }
 
-        // POST: SubCategory/Delete/5
+        // POST: Subcategory/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
+        public ActionResult Delete(int id) {
             if (id != 0) {
-                var query = string.Format(@"
-DELETE FROM SubCategory 
-Where SubCategoryID = @SubCategoryID");
-                DBHelper.ExecuteNonQuery(query,
-                    new SP("@SubCategoryID", id));
-
-                TempData["success_message"] = "You successfully deleted" + " " + id + " " + "category.";
-            }
+                subcategoryRepo.RemoveSubCategory(id);
+                TempData["success_message"] = "You successfully deleted" + " " + id + " " + " subcategory.";
+            }         
             else {
-                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + "category.";
+                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + " subcategory.";
             }
             return RedirectToAction("Index");
-         
         }
 
     }

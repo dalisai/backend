@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SaI.Repositories.Sql;
+using SaI.Repositories.MySql;
 using SaI.Models;
 using SaI.Helpers;
 
@@ -11,7 +11,7 @@ namespace SaI.Controllers
 {
     public class BranchController : Controller
     {
-        SqlBranchRepository branchRepository = new SqlBranchRepository();
+        MySqlBranchRepository branchRepository = new MySqlBranchRepository();
         public ActionResult Index()
         {
             Branches branches = new Branches();

@@ -383,27 +383,26 @@
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="/Department" onclick="location.href='@Url.Action("Index", "Department")'">
                             <i class="fa fa-laptop"></i>
                             <span>Department</span>
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> 
-                            <span>Categories</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                        <a href="/Category" onclick="location.href='@Url.Action("Index", "Category")'">
+                            <i class="fa fa-list-alt"></i>
+                            <span>Category</span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/Category"><i class="fa fa-circle-o"></i> Category</a></li>
-                            <li><a href="/SubCategory"><i class="fa fa-circle-o"></i> Sub-Category</a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
-                        <a href="/Supplier">
-                            <i class="fa fa-table"></i> 
+                        <a href="/SubCategory" onclick="location.href='@Url.Action("Index", "SubCategory")'">
+                            <i class="glyphicon glyphicon-th"></i>
+                            <span>SubCategory</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/Supplier" onclick="location.href='@Url.Action("Index", "Supplier")'">
+                            <i class="fa fa-table"></i>
                             <span>Supplier</span>
                         </a>
                     </li>

@@ -11,8 +11,6 @@
     <div class="box-header with-border">
         <h3 class="box-title">Delete  Category</h3>
     </div>
-
-    <h3 style="color:red;">Are you sure you want to delete this?</h3><br /><br />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.CategoryID)
     <form role="form">

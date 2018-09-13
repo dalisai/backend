@@ -747,6 +747,21 @@
     <script src="~/Content/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
 
+    @** For Toast / alert message*@
+    <script src="~/Content/toast/toast-jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="~/Content/toast/toastr.min.css" />
+    <script src="~/Content/toast/toastr.min.js"></script>
+    <script>
+		    var successMessage = `@ViewData["success_message"]`;
+		    var errorMessage = `@ViewData["error_message"]`;
+		    if (successMessage) {
+			    toastr.success(successMessage);
+		    }
+		    if (errorMessage) {
+			    toastr.error(errorMessage);
+		    }
+    </script>
+
 
     <!--for Pagination and search-->
     <script src="~/Content/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>

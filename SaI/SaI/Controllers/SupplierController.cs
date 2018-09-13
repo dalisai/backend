@@ -31,6 +31,7 @@ From Supplier")){
                     SupplierList.Add(dataSupplier);
                 }
             }
+            ViewData["success_message"] = TempData["success_message"];
             return View(SupplierList);
         }
 
@@ -53,6 +54,10 @@ VALUES (@Description)");
                     DBHelper.ExecuteNonQuery(query,
                         new SP("@Description", supplier.Description));
                 }
+                ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "category.";
+            }
+            else {
+                ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "category.";
             }
             return View(supplier);
         }
@@ -94,6 +99,10 @@ Where SupplierID = @SupplierID");
                         new SP("@SupplierID", supplier.SupplierID),
                         new SP("@Description", supplier.Description));
                 }
+                TempData["success_message"] = "You successfully edited" + " " + supplier.Description + " " + "category.";
+            }
+            else {
+                TempData["success_message"] = "You unsuccessfully edited" + " " + supplier.Description + " " + "category.";
             }
             return RedirectToAction("Index");
         }
@@ -131,6 +140,10 @@ DELETE FROM Supplier
 Where SupplierID = @SupplierID");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@SupplierID", id));
+                TempData["success_message"] = "You successfully deleted" + " " + id + " " + "category.";
+            }
+            else {
+                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + "category.";
             }
             return RedirectToAction("Index");
         }

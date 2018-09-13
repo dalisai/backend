@@ -33,6 +33,7 @@ From SubCategory")){
                     SubCategoryList.Add(datasubcategory);
                 }
             }
+            ViewData["success_message"] = TempData["success_message"];
             return View(SubCategoryList);
         }
 
@@ -55,6 +56,10 @@ VALUES (@Description)");
                     DBHelper.ExecuteNonQuery(query,
                         new SP("@Description", subcategory.Description));
                 }
+                ViewData["success_message"] = "You successfully created" + " " + subcategory.Description + " " + "category.";
+            }
+            else {
+                ViewData["error_message"] = "You unsuccessfully created" + " " + subcategory.Description + " " + "category.";
             }
             return View(subcategory);
         }
@@ -95,6 +100,10 @@ Where SubCategoryID = @SubCategoryID");
                         new SP("@SubCategoryID", subcategory.SubCategoryID),
                         new SP("@Description", subcategory.Description));
                 }
+                TempData["success_message"] = "You successfully edited" + " " + subcategory.Description + " " + "category.";
+            }
+            else {
+                TempData["success_message"] = "You unsuccessfully edited" + " " + subcategory.Description + " " + "category.";
             }
             return RedirectToAction("Index");
         }
@@ -131,6 +140,11 @@ DELETE FROM SubCategory
 Where SubCategoryID = @SubCategoryID");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@SubCategoryID", id));
+
+                TempData["success_message"] = "You successfully deleted" + " " + id + " " + "category.";
+            }
+            else {
+                TempData["success_message"] = "You unsuccessfully deleted" + " " + id + " " + "category.";
             }
             return RedirectToAction("Index");
          

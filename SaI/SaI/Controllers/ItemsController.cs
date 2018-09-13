@@ -5,17 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using SaI.Repositories.Sql;
 using SaI.Models;
+using SaI.Helpers;
 
 namespace SaI.Controllers
 {
     public class ItemsController : Controller
     {
-        SqlItemRepository repo = new SqlItemRepository();
+        SqlItemRepository itemRepository = new SqlItemRepository();
 
         public ActionResult Index()
         {
             var itemList = new Items {
-                ItemList = repo.FindItems()
+                ItemList = itemRepository.FindItems()
             };
             return View(itemList);
         }
@@ -23,11 +24,23 @@ namespace SaI.Controllers
         [Route("items/AddItem/")]
         public ActionResult AddItem()
         {
+            var query = @"
+SELECT * FROM dept";
+            return View();
+        }
+
+        [Route("items/AddItem/")]
+        [HttpPost]
+        public ActionResult AddItem(Item item)
+        {
+            if (ModelState.IsValid) {
+
+            }
             return View();
         }
 
         [Route("items/EditItem/")]
-        public ActionResult EditItem()
+        public ActionResult EditItem(int? id)
         {
             return View();
         }
@@ -43,5 +56,6 @@ namespace SaI.Controllers
         {
             return View();
         }
+        
     }
 }

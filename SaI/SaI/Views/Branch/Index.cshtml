@@ -1,4 +1,4 @@
-﻿@model SaI.Models.Items
+﻿@model IEnumerable<SaI.Models.Branch>
 
 <section class="content">
     <!-- SELECT2 EXAMPLE -->
@@ -6,7 +6,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Items</h3>
             <div class="box-tools">
-                <button type="submit" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("AddItem", "Items")'">Add Item</button>&nbsp;
+                <button type="submit" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Add", "Branch")'">Add Branch</button>&nbsp;
             </div>
         </div>
         <div class="box">
@@ -18,24 +18,23 @@
                 <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-bordered table-striped dataTable" role="grid" id="example1" aria-describedby="example1_info">
+                            <table class="table table-bordered table-hover dataTable" role="grid" id="example1" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
-                                        <th>ItemCode</th>
-                                        <th>Long Description</th>
-                                        <th>Short Description</th>
-                                        <th>Large Packing</th>
+                                        <th>ID</th>
+                                        <th>Branch Description</th>
                                         <th class="text-center">Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.ItemList) {
+                                    @foreach (var item in Model) {
                                         <tr>
-                                            <td>@item.ItemCode</td>
-                                            <td>@item.LongDescription</td>
-                                            <td>@item.ShortDescription</td>
-                                            <td>@item.LargePacking</td>
-                                            <td class="text-center"><button class="btn btn-info">Edit</button></td>
+                                            <td>@item.ID</td>
+                                            <td>@item.Description</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-primary"  onclick="location.href='@Url.Action("Edit", "Branch", new { id = @item.ID})'">Edit</button>&nbsp;
+                                                <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Branch", new { id = @item.ID})'">Delete</button>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

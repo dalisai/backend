@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="~/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    @RenderSection("Items", required: false)
+    <link href="~/Content/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -372,7 +372,7 @@
                         </a>
                     </li>*@
                     <li class="treeview">
-                        <a href="#" onclick="location.href='@Url.Action("Index", "Items")'">
+                        <a href="/Items" onclick="location.href='@Url.Action("Index", "Items")'">
                             <i class="fa fa-pie-chart"></i>
                             <span>Items</span>
                         </a>
@@ -403,7 +403,7 @@
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="/Branch" onclick="location.href='@Url.Action("Index", "Branch")'">
                             <i class="fa fa-bell-o"></i>
                             <span>Branch</span>
                         </a>
@@ -746,6 +746,27 @@
     <script src="~/Content/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/dist/js/demo.js"></script>
-    @RenderSection("ItemsScript", required: false)
+    <script src="~/Content/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+    </script>
+    <script src="~/Content/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+    </script>
 </body>
 </html>

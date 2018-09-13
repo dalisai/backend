@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Dashboard</title>
+    <link rel="stylesheet" href="~/Content/bower_components/select2/dist/css/select2.min.css">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -392,12 +393,12 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Category</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Sub-Category</a></li>
+                            <li><a href="/Category"><i class="fa fa-circle-o"></i> Category</a></li>
+                            <li><a href="/SubCategory"><i class="fa fa-circle-o"></i> Sub-Category</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="/Supplier">
                             <i class="fa fa-table"></i> 
                             <span>Supplier</span>
                         </a>
@@ -745,9 +746,27 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Content/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="~/Content/dist/js/demo.js"></script>
+
+    @** For Toast / alert message*@
+    <script src="~/Content/toast/toast-jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="~/Content/toast/toastr.min.css" />
+    <script src="~/Content/toast/toastr.min.js"></script>
+    <script>
+		    var successMessage = `@ViewData["success_message"]`;
+		    var errorMessage = `@ViewData["error_message"]`;
+		    if (successMessage) {
+			    toastr.success(successMessage);
+		    }
+		    if (errorMessage) {
+			    toastr.error(errorMessage);
+		    }
+    </script>
+
+
+    <!--for Pagination and search-->
     <script src="~/Content/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Content/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/dist/js/demo.js"></script>
     <script>
         $(function () {
             $('#example1').DataTable()
@@ -761,6 +780,7 @@
             })
         })
     </script>
+    @RenderSection("ItemsScript", required: false)
     <script src="~/Content/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script>
         $(function () {

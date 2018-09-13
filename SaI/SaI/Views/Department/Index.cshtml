@@ -1,9 +1,6 @@
 ﻿@model  IEnumerable<SaI.Models.Department>
 
 
-@section Items{
-    <link href="~/Content/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-}
 <section class="content">
     <!-- SELECT2 EXAMPLE -->
     <div class="box box-primary">
@@ -56,21 +53,3 @@
         </div>
     </div>
 </section>
-
-@section ItemsScript{
-    <script src="~/Content/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="~/Content/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script>
-      $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : false,
-          'ordering'    : true,
-          'info'        : true,
-          'autoWidth'   : false
-        })
-      })
-    </script>
-}

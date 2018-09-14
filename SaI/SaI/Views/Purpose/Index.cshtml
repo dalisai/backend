@@ -1,12 +1,12 @@
-﻿@model IEnumerable<SaI.Models.Branch>
+﻿@model IEnumerable<SaI.Models.Purpose>
 
 <section class="content">
     <!-- SELECT2 EXAMPLE -->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Branch</h3>
+            <h3 class="box-title">Purpose</h3>
             <div class="box-tools">
-                <button type="submit" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Add", "Branch")'">Add Branch</button>&nbsp;
+                <button type="submit" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Add", "Purpose")'">Add Purpose</button>&nbsp;
             </div>
         </div>
         <div class="box">
@@ -22,26 +22,25 @@
                                 <thead>
                                     <tr role="row">
                                         <th>No.</th>
-                                        <th>Branch Description</th>
+                                        <th>Purpose Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @{ 
-                                        int x = 1;
-
-                                        foreach (var item in Model) {
+                                    @{
+                                            int x = 1;
+                                            foreach (var item in Model) {
                                             <tr>
                                                 <td>@x</td>
                                                 <td>@item.Description</td>
                                                 <td>
-                                                    <button class="btn btn-warning glyphicon glyphicon-pencil"  onclick="location.href='@Url.Action("Edit", "Branch", new { id = @item.ID })'"> Edit</button>&nbsp;
-                                                    <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Branch", new { id = @item.ID })'"> Delete</button>
+                                                    <button class="btn btn-warning glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("Edit", "Purpose", new { id = @item.ID})'"> Edit</button>&nbsp;
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Purpose", new { id = @item.ID})'"> Delete</button>
                                                 </td>
                                             </tr>
                                             x += 1;
                                         }
-                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>

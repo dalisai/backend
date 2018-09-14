@@ -41,6 +41,7 @@ namespace SaI.Controllers
                     if (ModelState.IsValid) {
                         branchRepository.SaveBranch(branch.Description.Trim());
                         ViewData["success_message"] = "New branch successfully saved.";
+                        ModelState.Clear();
                     }
                 }
                 else {

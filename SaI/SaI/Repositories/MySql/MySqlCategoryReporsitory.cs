@@ -48,7 +48,7 @@ WHERE id = @ID";
         public Boolean SaveCategory(Category category) {
             try {
                 var query = string.Format(@"
-INSERT INTO Category(description) 
+INSERT INTO category(description) 
 VALUES (@Description)");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@Description", category.Description));
@@ -62,7 +62,7 @@ VALUES (@Description)");
         public Boolean UpdateCategory(Category category) {
             try {
                 var query = string.Format(@"
-UPDATE Category 
+UPDATE category 
 SET Description = @Description
 Where ID = @ID");
                 DBHelper.ExecuteNonQuery(query,
@@ -77,11 +77,26 @@ Where ID = @ID");
         public Boolean RemoveCategory(int id) {
             try {
                 var query = string.Format(@"
-DELETE FROM Category 
+DELETE FROM category 
 Where ID = @ID");
-                DBHelper.ExecuteNonQuery(query,
+                var rs = DBHelper.ExecuteNonQuery(query,
                     new SP("@ID", id));
                 return true;
+            }
+            catch (Exception ex) { }
+            return false;
+        }
+
+        public Boolean IsCategoryExist(string description) {
+            try {
+                var query = string.Format(@"
+Select * FROM category 
+Where description = @description");
+                var rs = DBHelper.ExecuteReader(query, 
+                            new SP("@description", description));
+                 if(rs.Read()) {
+                    return true;
+                 }
             }
             catch (Exception ex) { }
             return false;

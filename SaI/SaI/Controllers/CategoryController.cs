@@ -15,11 +15,14 @@ namespace SaI.Controllers
     public class CategoryController : Controller
     {
         MySqlCategoryRepository categoryRepo = new MySqlCategoryRepository();
+       
+
         // GET: Category
         public ActionResult Index()
         {
             var categories = categoryRepo.FindCategories();
             ViewData["success_message"] = TempData["success_message"];
+            ViewData["error_message"] = TempData["error_message"];
             return View(categories);
         }
 
@@ -32,18 +35,22 @@ namespace SaI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Category category) {
-
             if (category.Description != null) {
-
-                if (ModelState.IsValid) {
-                    categoryRepo.SaveCategory(category);
+                bool exist = categoryRepo.IsCategoryExist(category.Description);
+                if (exist == false) {
+                    if (ModelState.IsValid) {
+                        categoryRepo.SaveCategory(category);
+                        ViewData["success_message"] = "You successfully created" + " " + category.Description + " " + "category.";
+                    }
                 }
-                ViewData["success_message"] = "You successfully created" + " " + category.Description + " " + "category.";
+                else {
+                    ViewData["error_message"] = "The description" + " " + category.Description + " " + "category already exist.";
+                }
             }
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + category.Description + " " + "category.";
             }
-            return View(category);
+            return View();
         }
 
         // GET: Category/Edit/5
@@ -61,14 +68,20 @@ namespace SaI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category) {
-            if (ModelState.IsValid) {
-                if (category.Description != null) {
-                    categoryRepo.UpdateCategory(category);
+            if (category.Description != null) {
+                bool exist = categoryRepo.IsCategoryExist(category.Description);
+                if (exist == false) {
+                    if (ModelState.IsValid) {
+                        categoryRepo.UpdateCategory(category);
+                        TempData["success_message"] = "You successfully edited" + " " + category.Description + " " + "category.";
+                    }
                 }
-                TempData["success_message"] = "You successfully edited" + " " + category.Description + " " + "category.";
+                else {
+                    TempData["error_message"] = "The description" + " " + category.Description + " " + "category already exist.";
+                }
             }
             else {
-                TempData["success_message"] = "You unsuccessfully edited" + " " + category.Description + " " + "category.";
+                TempData["error_message"] = "You unsuccessfully edited" + " " + category.Description + " " + "category.";
             }
             return RedirectToAction("Index");
         }

@@ -20,6 +20,7 @@ namespace SaI.Controllers
         {
             var suppliers = supplierRepo.FindSuppliers();
             ViewData["success_message"] = TempData["success_message"];
+            ViewData["error_message"] = TempData["error_message"];
             return View(suppliers);
         }
 
@@ -32,13 +33,17 @@ namespace SaI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Supplier supplier) {
-
             if (supplier.Description != null) {
-
-                if (ModelState.IsValid) {
-                    supplierRepo.SaveSupplier(supplier);
+                bool exist = supplierRepo.IsSupplierExist(supplier.Description);
+                if (exist == false) {
+                    if (ModelState.IsValid) {
+                        supplierRepo.SaveSupplier(supplier);
+                        ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
+                    }
                 }
-                ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
+                else {
+                    ViewData["error_message"] = "The description" + " " + supplier.Description + " " + "supplier already exist.";
+                }
             }
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "supplier.";
@@ -61,14 +66,20 @@ namespace SaI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Supplier supplier) {
-            if (ModelState.IsValid) {
-                if (supplier.Description != null) {
-                    supplierRepo.UpdateSupplier(supplier);
+            if (supplier.Description != null) {
+                bool exist = supplierRepo.IsSupplierExist(supplier.Description);
+                if (exist == false) {
+                    if (ModelState.IsValid) {
+                        supplierRepo.UpdateSupplier(supplier);
+                        TempData["success_message"] = "You successfully edited" + " " + supplier.Description + " " + "supplier.";
+                    }
                 }
-                TempData["success_message"] = "You successfully edited" + " " + supplier.Description + " " + "supplier.";
+                else {
+                    TempData["error_message"] = "The description" + " " + supplier.Description + " " + "supplier already exist.";
+                }
             }
             else {
-                TempData["success_message"] = "You unsuccessfully edited" + " " + supplier.Description + " " + "supplier.";
+                TempData["error_message"] = "You unsuccessfully edited" + " " + supplier.Description + " " + "supplier.";
             }
             return RedirectToAction("Index");
         }

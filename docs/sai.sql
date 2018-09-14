@@ -30,8 +30,8 @@ USE `sai`;
 --
 -- Table structure for table `Category`
 --
-create table Category (
- CategoryID int unsigned not null auto_increment primary key,
+create table category (
+ ID int(11) not null auto_increment primary key,
  Description varchar(500) not null
 );
 
@@ -39,8 +39,8 @@ create table Category (
 --
 -- Table structure for table `SubCategory`
 --
-create table  SubCategory (
- SubCategoryID int unsigned not null auto_increment primary key,
+create table  subCategory (
+ ID int(11) not null auto_increment primary key,
  Description varchar(500) not null
 );
 
@@ -48,8 +48,8 @@ create table  SubCategory (
 --
 -- Table structure for table `Supplier`
 --
-create table Supplier (
- SupplierID int unsigned not null auto_increment primary key,
+create table supplier (
+ ID int(11) not null auto_increment primary key,
  Description varchar(500) not null
 );
 

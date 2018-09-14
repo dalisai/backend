@@ -39,6 +39,7 @@ namespace SaI.Controllers
                     if (ModelState.IsValid) {
                         locationRepository.SaveLocation(location.Description);
                         ViewData["success_message"] = "Location successfully saved.";
+                        ModelState.Clear();
                     }
                 }
                 else {

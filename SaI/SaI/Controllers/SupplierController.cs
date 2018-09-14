@@ -39,6 +39,7 @@ namespace SaI.Controllers
                     if (ModelState.IsValid) {
                         supplierRepo.SaveSupplier(supplier);
                         ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
+                        ModelState.Clear();
                     }
                 }
                 else {

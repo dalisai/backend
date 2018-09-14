@@ -49,6 +49,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
             }
+            ModelState.Clear();
             return View(subCategory);
         }
 

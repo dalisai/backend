@@ -50,7 +50,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + category.Description + " " + "category.";
             }
-            return View(category);
+            return View();
         }
 
         // GET: Category/Edit/5

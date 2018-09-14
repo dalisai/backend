@@ -39,6 +39,7 @@ namespace SaI.Controllers
                     if (ModelState.IsValid) {
                         purposeRepository.SavePurpose(purpose.Description);
                         ViewData["success_message"] = "Purpose successfully saved.";
+                        ModelState.Clear();
                     }
                 }
                 else {

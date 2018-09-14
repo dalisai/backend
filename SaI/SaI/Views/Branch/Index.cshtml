@@ -21,22 +21,27 @@
                             <table class="table table-bordered table-hover dataTable" role="grid" id="example1" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
-                                        <th>ID</th>
+                                        <th>No.</th>
                                         <th>Branch Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model) {
-                                        <tr>
-                                            <td>@item.ID</td>
-                                            <td>@item.Description</td>
-                                            <td>
-                                                <button class="btn btn-warning glyphicon glyphicon-pencil"  onclick="location.href='@Url.Action("Edit", "Branch", new { id = @item.ID})'"> Edit</button>&nbsp;
-                                                <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Branch", new { id = @item.ID})'"> Delete</button>
-                                            </td>
-                                        </tr>
-                                    }
+                                    @{ 
+                                        int x = 1;
+
+                                        foreach (var item in Model) {
+                                            <tr>
+                                                <td>@x</td>
+                                                <td>@item.Description</td>
+                                                <td>
+                                                    <button class="btn btn-warning glyphicon glyphicon-pencil"  onclick="location.href='@Url.Action("Edit", "Branch", new { id = @item.ID })'"> Edit</button>&nbsp;
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Branch", new { id = @item.ID })'"> Delete</button>
+                                                </td>
+                                            </tr>
+                                            x += 1;
+                                        }
+                                        }
                                 </tbody>
                             </table>
                         </div>

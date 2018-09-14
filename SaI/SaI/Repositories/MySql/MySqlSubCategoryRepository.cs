@@ -85,5 +85,19 @@ Where ID = @ID");
             catch (Exception ex) { }
             return false;
         }
+        public Boolean IsSubCategoryExist(string description) {
+            try {
+                var query = string.Format(@"
+Select * FROM subcategory 
+Where description = @description");
+                var rs = DBHelper.ExecuteReader(query,
+                            new SP("@description", description));
+                if (rs.Read()) {
+                    return true;
+                }
+            }
+            catch (Exception ex) { }
+            return false;
+        }
     }
 }

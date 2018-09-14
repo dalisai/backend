@@ -79,9 +79,24 @@ Where ID = @ID");
                 var query = string.Format(@"
 DELETE FROM category 
 Where ID = @ID");
-                DBHelper.ExecuteNonQuery(query,
+                var rs = DBHelper.ExecuteNonQuery(query,
                     new SP("@ID", id));
                 return true;
+            }
+            catch (Exception ex) { }
+            return false;
+        }
+
+        public Boolean IsCategoryExist(string description) {
+            try {
+                var query = string.Format(@"
+Select * FROM category 
+Where description = @description");
+                var rs = DBHelper.ExecuteReader(query, 
+                            new SP("@description", description));
+                 if(rs.Read()) {
+                    return true;
+                 }
             }
             catch (Exception ex) { }
             return false;

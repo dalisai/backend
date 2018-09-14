@@ -20,6 +20,7 @@ namespace SaI.Controllers
         {
             var subcategories = subcategoryRepo.FindSubCategories();
             ViewData["success_message"] = TempData["success_message"];
+            ViewData["error_message"] = TempData["error_message"];
             return View(subcategories);
         }
 
@@ -34,11 +35,16 @@ namespace SaI.Controllers
         public ActionResult Add(SubCategory subCategory) {
 
             if (subCategory.Description != null) {
-
-                if (ModelState.IsValid) {
-                    subcategoryRepo.SaveSubCategory(subCategory);
+                bool exist = subcategoryRepo.IsSubCategoryExist(subCategory.Description);
+                if (exist == false) {
+                    if (ModelState.IsValid) {
+                        subcategoryRepo.SaveSubCategory(subCategory);
+                        ViewData["success_message"] = "You successfully created" + " " + subCategory.Description + " " + "subCategory.";
+                    }
                 }
-                ViewData["success_message"] = "You successfully created" + " " + subCategory.Description + " " + "subCategory.";
+                else {
+                    ViewData["error_message"] = "The description" + " " + subCategory.Description + " " + "subCategory already exist.";
+                }
             }
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
@@ -61,11 +67,15 @@ namespace SaI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SubCategory subcategory) {
-            if (ModelState.IsValid) {
-                if (subcategory.Description != null) {
+            if (subcategory.Description != null) {
+                bool exist = subcategoryRepo.IsSubCategoryExist(subcategory.Description);
+                if (exist == false) {
                     subcategoryRepo.UpdateSubCategory(subcategory);
+                    TempData["success_message"] = "You successfully edited" + " " + subcategory.Description + " " + "subcategory.";
                 }
-                TempData["success_message"] = "You successfully edited" + " " + subcategory.Description + " " + "subcategory.";
+                else {
+                    TempData["error_message"] = "The description" + " " + subcategory.Description + " " + "subcategory already exist.";
+                }
             }
             else {
                 TempData["success_message"] = "You unsuccessfully edited" + " " + subcategory.Description + " " + "subcategory.";

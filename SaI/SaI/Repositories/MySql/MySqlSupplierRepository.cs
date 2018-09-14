@@ -86,5 +86,20 @@ Where ID = @ID");
             catch (Exception ex) { }
             return false;
         }
+
+        public Boolean IsSupplierExist(string description) {
+            try {
+                var query = string.Format(@"
+Select * FROM supplier 
+Where description = @description");
+                var rs = DBHelper.ExecuteReader(query,
+                            new SP("@description", description));
+                if (rs.Read()) {
+                    return true;
+                }
+            }
+            catch (Exception ex) { }
+            return false;
+        }
     }
 }

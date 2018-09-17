@@ -49,7 +49,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
             }
-            return View(subCategory);
+            return Redirect(Request.Url.AbsoluteUri);
         }
 
         // GET: Subcategory/Edit/5

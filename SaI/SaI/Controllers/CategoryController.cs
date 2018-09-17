@@ -50,7 +50,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + category.Description + " " + "category.";
             }
-            return View();
+            return Redirect(Request.Url.AbsoluteUri);
         }
 
         // GET: Category/Edit/5

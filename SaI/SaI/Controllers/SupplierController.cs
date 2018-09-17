@@ -48,7 +48,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "supplier.";
             }
-            return View(supplier);
+            return Redirect(Request.Url.AbsoluteUri);
         }
 
         // GET: Supplier/Edit/5

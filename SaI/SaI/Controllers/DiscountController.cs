@@ -9,60 +9,62 @@ using SaI.Repositories.MySql;
 
 namespace SaI.Controllers
 {
-    public class DepartmentController : Controller
+    public class DiscountController : Controller
     {
-        MySqlDepartmentRepository departmentRepo = new MySqlDepartmentRepository();
-        // GET: Department
+        MySqlDiscountRepository discountRepo = new MySqlDiscountRepository();
+        // GET: Discount
         public ActionResult Index()
         {
-            var departments = departmentRepo.FindDepartments();
-            return View(departments);
+            var discounts = discountRepo.FindDiscounts();
+            return View(discounts);
         }
 
+
+        // GET: Discount/Create
         public ActionResult Add()
         {
             return View();
         }
 
-        // POST: Category/Create
+        // POST: Discount/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add(Department department)
+        public ActionResult Add(Discount discount)
         {
             if (ModelState.IsValid)
             {
-                
-                departmentRepo.SaveDepartment(department);
+
+                discountRepo.SaveDiscount(discount);
                 ModelState.Clear();
             }
             return View();
         }
 
-        // GET: Category/Edit/5
+        // GET: Discount/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else {
-                var dept = departmentRepo.FindDepartment((int)id);
+            else
+            {
+                var dept = discountRepo.FindDiscount((int)id);
                 return View(dept);
             }
         }
 
-        // POST: Category/Edit/5
+        // POST: Discount/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Department department)
+        public ActionResult Edit(Discount discount)
         {
-            if (ModelState.IsValid){
-                departmentRepo.UpdateDepartment(department);                
+            if (ModelState.IsValid)
+            {
+                discountRepo.UpdateDiscount(discount);
             }
             return RedirectToAction("Index");
         }
 
-        // GET: Category/Delete/5
+        // GET: Discount/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -71,20 +73,18 @@ namespace SaI.Controllers
             }
             else
             {
-                var dept = departmentRepo.FindDepartment((int)id);
+                var dept = discountRepo.FindDiscount((int)id);
                 return View(dept);
             }
-            
         }
 
-        // POST: Category/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        // POST: Discount/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
             if (ModelState.IsValid)
             {
-                departmentRepo.RemoveDepartment(id);
+                discountRepo.RemoveDiscount(id);
             }
             return RedirectToAction("Index");
         }

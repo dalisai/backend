@@ -236,7 +236,7 @@ CREATE TABLE `deposit` (
   `id` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `total` tinyint(4) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `cashier` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -294,27 +294,27 @@ CREATE TABLE `eod` (
   `id` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `posted` tinyint(4) DEFAULT NULL,
-  `sales` decimal(10,0) DEFAULT NULL,
-  `sales_qty` decimal(10,0) DEFAULT NULL,
-  `addon` decimal(10,0) DEFAULT NULL,
-  `addon_qty` decimal(10,0) DEFAULT NULL,
-  `discount` decimal(10,0) DEFAULT NULL,
-  `discount_qty` decimal(10,0) DEFAULT NULL,
-  `local_tax` decimal(10,0) DEFAULT NULL,
-  `cash` decimal(10,0) DEFAULT NULL,
-  `cash_qty` decimal(10,0) DEFAULT NULL,
-  `card` decimal(10,0) DEFAULT NULL,
-  `card_qty` decimal(10,0) DEFAULT NULL,
-  `gift` decimal(10,0) DEFAULT NULL,
-  `gift_qty` decimal(10,0) DEFAULT NULL,
-  `check` decimal(10,0) DEFAULT NULL,
-  `check_qty` decimal(10,0) DEFAULT NULL,
-  `charge` decimal(10,0) DEFAULT NULL,
-  `charge_qty` decimal(10,0) DEFAULT NULL,
-  `misc` decimal(10,0) DEFAULT NULL,
-  `misc_qty` decimal(10,0) DEFAULT NULL,
-  `refund` decimal(10,0) DEFAULT NULL,
-  `refund_qty` decimal(10,0) DEFAULT NULL,
+  `sales` decimal(10,2) DEFAULT NULL,
+  `sales_qty` decimal(10,2) DEFAULT NULL,
+  `addon` decimal(10,2) DEFAULT NULL,
+  `addon_qty` decimal(10,2) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
+  `discount_qty` decimal(10,2) DEFAULT NULL,
+  `local_tax` decimal(10,2) DEFAULT NULL,
+  `cash` decimal(10,2) DEFAULT NULL,
+  `cash_qty` decimal(10,2) DEFAULT NULL,
+  `card` decimal(10,2) DEFAULT NULL,
+  `card_qty` decimal(10,2) DEFAULT NULL,
+  `gift` decimal(10,2) DEFAULT NULL,
+  `gift_qty` decimal(10,2) DEFAULT NULL,
+  `check` decimal(10,2) DEFAULT NULL,
+  `check_qty` decimal(10,2) DEFAULT NULL,
+  `charge` decimal(10,2) DEFAULT NULL,
+  `charge_qty` decimal(10,2) DEFAULT NULL,
+  `misc` decimal(10,2) DEFAULT NULL,
+  `misc_qty` decimal(10,2) DEFAULT NULL,
+  `refund` decimal(10,2) DEFAULT NULL,
+  `refund_qty` decimal(10,2) DEFAULT NULL,
   `pax_qty` int(11) DEFAULT NULL,
   `dine_in` int(11) DEFAULT NULL,
   `take_out` int(11) DEFAULT NULL,
@@ -396,27 +396,27 @@ CREATE TABLE `items` (
 
 CREATE TABLE `zmode` (
   `id` int(11) NOT NULL,
-  `sales` decimal(10,0) DEFAULT NULL,
-  `salesqty` decimal(10,0) DEFAULT NULL,
-  `surcharge` decimal(10,0) DEFAULT NULL,
-  `surcharge_qty` decimal(10,0) DEFAULT NULL,
-  `discount` decimal(10,0) DEFAULT NULL,
-  `discount_qty` decimal(10,0) DEFAULT NULL,
-  `local_tax` decimal(10,0) DEFAULT NULL,
-  `cash` decimal(10,0) DEFAULT NULL,
-  `cash_qty` decimal(10,0) DEFAULT NULL,
-  `card` decimal(10,0) DEFAULT NULL,
-  `card_qty` decimal(10,0) DEFAULT NULL,
-  `gift` decimal(10,0) DEFAULT NULL,
-  `gift_qty` decimal(10,0) DEFAULT NULL,
-  `check` decimal(10,0) DEFAULT NULL,
-  `check_qty` decimal(10,0) DEFAULT NULL,
-  `charge` decimal(10,0) DEFAULT NULL,
-  `charge_qty` decimal(10,0) DEFAULT NULL,
-  `misc` decimal(10,0) DEFAULT NULL,
-  `misc_qty` decimal(10,0) DEFAULT NULL,
-  `refund` decimal(10,0) DEFAULT NULL,
-  `refund_qty` decimal(10,0) DEFAULT NULL
+  `sales` decimal(10,2) DEFAULT NULL,
+  `salesqty` decimal(10,2) DEFAULT NULL,
+  `surcharge` decimal(10,2) DEFAULT NULL,
+  `surcharge_qty` decimal(10,2) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
+  `discount_qty` decimal(10,2) DEFAULT NULL,
+  `local_tax` decimal(10,2) DEFAULT NULL,
+  `cash` decimal(10,2) DEFAULT NULL,
+  `cash_qty` decimal(10,2) DEFAULT NULL,
+  `card` decimal(10,2) DEFAULT NULL,
+  `card_qty` decimal(10,2) DEFAULT NULL,
+  `gift` decimal(10,2) DEFAULT NULL,
+  `gift_qty` decimal(10,2) DEFAULT NULL,
+  `check` decimal(10,2) DEFAULT NULL,
+  `check_qty` decimal(10,2) DEFAULT NULL,
+  `charge` decimal(10,2) DEFAULT NULL,
+  `charge_qty` decimal(10,2) DEFAULT NULL,
+  `misc` decimal(10,2) DEFAULT NULL,
+  `misc_qty` decimal(10,2) DEFAULT NULL,
+  `refund` decimal(10,2) DEFAULT NULL,
+  `refund_qty` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -453,14 +453,14 @@ CREATE TABLE `order2` (
   `itemcode` varchar(45) DEFAULT NULL,
   `othercode` varchar(45) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
-  `sell` decimal(10,0) DEFAULT NULL,
-  `orig_sell_price` decimal(10,0) DEFAULT NULL,
-  `cost` decimal(10,0) DEFAULT NULL,
+  `sell` decimal(10,2) DEFAULT NULL,
+  `orig_sell_price` decimal(10,2) DEFAULT NULL,
+  `cost` decimal(10,2) DEFAULT NULL,
   `item_discount_p` varchar(45) DEFAULT NULL,
-  `item_discount` decimal(10,0) DEFAULT NULL,
+  `item_discount` decimal(10,2) DEFAULT NULL,
   `discount_type` varchar(45) DEFAULT NULL,
   `discount_ref` varchar(45) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `supervisor` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -487,7 +487,7 @@ CREATE TABLE `pay_type` (
   `description` varchar(45) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   `backcolor` varchar(45) DEFAULT NULL,
-  `discount` decimal(10,0) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
   `rate` int(11) DEFAULT NULL,
   `picture` blob,
   `picture_path` varchar(45) DEFAULT NULL
@@ -508,9 +508,9 @@ CREATE TABLE `payment_entry` (
   `reference2` varchar(45) DEFAULT NULL,
   `reference3` varchar(45) DEFAULT NULL,
   `reference4` varchar(45) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `inv_no` int(11) DEFAULT NULL,
-  `paid_amount` decimal(10,0) DEFAULT NULL
+  `paid_amount` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -528,7 +528,7 @@ CREATE TABLE `payment_entry_temp` (
   `reference2` varchar(45) DEFAULT NULL,
   `reference3` varchar(45) DEFAULT NULL,
   `reference4` varchar(45) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `inv_no` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -542,9 +542,9 @@ CREATE TABLE `receipt_temp` (
   `id` int(11) NOT NULL,
   `qty` int(11) DEFAULT NULL,
   `sdesc` varchar(45) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  `discount_percent` decimal(10,0) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `discount_percent` decimal(10,2) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `group` varchar(45) DEFAULT NULL,
   `entertainer` varchar(45) DEFAULT NULL,
   `time_in` datetime DEFAULT NULL,
@@ -570,31 +570,31 @@ CREATE TABLE `sales1` (
   `total` tinyint(4) DEFAULT NULL,
   `posted` tinyint(4) DEFAULT NULL,
   `sales` varchar(45) DEFAULT NULL,
-  `total_amount` decimal(10,0) DEFAULT NULL,
-  `refund_amount` decimal(10,0) DEFAULT NULL,
+  `total_amount` decimal(10,2) DEFAULT NULL,
+  `refund_amount` decimal(10,2) DEFAULT NULL,
   `refund_qty` int(11) DEFAULT NULL,
-  `discount` decimal(10,0) DEFAULT NULL,
-  `discount_p` decimal(10,0) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
+  `discount_p` decimal(10,2) DEFAULT NULL,
   `discount_qty` int(11) DEFAULT NULL,
-  `addon` decimal(10,0) DEFAULT NULL,
-  `addon_p` decimal(10,0) DEFAULT NULL,
+  `addon` decimal(10,2) DEFAULT NULL,
+  `addon_p` decimal(10,2) DEFAULT NULL,
   `addon_qty` int(11) DEFAULT NULL,
   `service_charge_p` varchar(45) DEFAULT NULL,
   `service_charge` int(11) DEFAULT NULL,
   `service_charge_qty` int(11) DEFAULT NULL,
   `local_tax` int(11) DEFAULT NULL,
   `payment_code` int(11) DEFAULT NULL,
-  `card_amount` decimal(10,0) DEFAULT NULL,
+  `card_amount` decimal(10,2) DEFAULT NULL,
   `card_qty` int(11) DEFAULT NULL,
-  `gift_amount` decimal(10,0) DEFAULT NULL,
+  `gift_amount` decimal(10,2) DEFAULT NULL,
   `gift_qty` int(11) DEFAULT NULL,
-  `check_amount` decimal(10,0) DEFAULT NULL,
+  `check_amount` decimal(10,2) DEFAULT NULL,
   `check_qty` int(11) DEFAULT NULL,
-  `charge_amount` decimal(10,0) DEFAULT NULL,
+  `charge_amount` decimal(10,2) DEFAULT NULL,
   `charge_qty` int(11) DEFAULT NULL,
-  `cash_amount` decimal(10,0) DEFAULT NULL,
+  `cash_amount` decimal(10,2) DEFAULT NULL,
   `cash_qty` int(11) DEFAULT NULL,
-  `misc` decimal(10,0) DEFAULT NULL,
+  `misc` decimal(10,2) DEFAULT NULL,
   `paid` tinyint(4) DEFAULT NULL,
   `table_no` varchar(45) DEFAULT NULL,
   `order_type` varchar(45) DEFAULT NULL,
@@ -630,15 +630,15 @@ CREATE TABLE `sales2` (
   `itemcode` varchar(45) DEFAULT NULL,
   `othercode` varchar(45) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
-  `sell` decimal(10,0) DEFAULT NULL,
-  `orig_sell_price` decimal(10,0) DEFAULT NULL,
-  `cost` decimal(10,0) DEFAULT NULL,
-  `item_discount_p` decimal(10,0) DEFAULT NULL,
-  `item_discount` decimal(10,0) DEFAULT NULL,
+  `sell` decimal(10,2) DEFAULT NULL,
+  `orig_sell_price` decimal(10,2) DEFAULT NULL,
+  `cost` decimal(10,2) DEFAULT NULL,
+  `item_discount_p` decimal(10,2) DEFAULT NULL,
+  `item_discount` decimal(10,2) DEFAULT NULL,
   `discount_type` varchar(45) DEFAULT NULL,
   `discount_ref` varchar(45) DEFAULT NULL,
   `item_discount_qty` int(11) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `sales` varchar(45) DEFAULT NULL,
   `supervisor` varchar(45) DEFAULT NULL,
   `entertainer` varchar(45) DEFAULT NULL,
@@ -686,10 +686,10 @@ CREATE TABLE `suspend` (
   `id` int(11) NOT NULL,
   `qty` int(11) DEFAULT NULL,
   `description` text,
-  `price` decimal(10,0) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
-  `discount_p` decimal(10,0) DEFAULT NULL,
-  `cost` decimal(10,0) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `discount_p` decimal(10,2) DEFAULT NULL,
+  `cost` decimal(10,2) DEFAULT NULL,
   `itemcode` text,
   `remarks` text,
   `discount_type` varchar(45) DEFAULT NULL,
@@ -777,7 +777,7 @@ CREATE TABLE `voided_items` (
   `order_type` varchar(45) DEFAULT NULL,
   `itemcode` varchar(45) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `reason` varchar(45) DEFAULT NULL,
   `grm` varchar(45) DEFAULT NULL,
   `archived` tinyint(4) DEFAULT NULL
@@ -793,7 +793,7 @@ CREATE TABLE `withdraw` (
   `id` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `total` tinyint(4) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
   `cashier` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1130,8 +1130,31 @@ ALTER TABLE `withdraw`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+--
+-- Table structure for table `branch`
+--
 CREATE TABLE `branch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `purpose`
+--
+CREATE TABLE `purpose` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `location`
+--
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+

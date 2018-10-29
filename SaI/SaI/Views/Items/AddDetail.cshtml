@@ -14,6 +14,9 @@
             <div class="box-body">
                 @Html.HiddenFor(model => model.Item.ID)
                 @Html.HiddenFor(model => model.Item.ItemCode)
+                @Html.HiddenFor(model => model.Item.LargePacking)
+                @Html.HiddenFor(model => model.Item.LongDescription)
+                @Html.HiddenFor(model => model.Item.ShortDescription)
                 <div class="row">
                     <div class="col-md-6">
                         @*<div class="form-group">

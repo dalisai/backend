@@ -27,6 +27,7 @@ FROM payment_entry";
                 };
                 payments.Add(payment);
             }
+            rs.Close();
             return payments;
         }
 
@@ -47,6 +48,7 @@ WHERE id = @ID";
                     Ratio = DBHelper.GetDecimal(rs, 2)
                 };
             }
+            rs.Close();
             return paymentData;
         }
 

@@ -51,6 +51,7 @@ ORDER BY id";
                 };
                 items.Add(item);
             }
+            rs.Close();
             return items;
         }
 
@@ -92,8 +93,10 @@ WHERE id = @ID";
                     IsInOpenDepartment = DBHelper.GetBoolean(rs, 12),
                     IsOpenPrice = DBHelper.GetBoolean(rs, 13)
                 };
+                rs.Close();
                 return item;
             }
+            rs.Close();
             return null;
         }
 
@@ -185,6 +188,7 @@ WHERE itemcode = @ItemCode";
                 };
                 itemDetails.Add(itemDetail);
             }
+            rs.Close();
             return itemDetails;
         }
 
@@ -261,8 +265,10 @@ WHERE id = @ID";
                     OpenDepartment = DBHelper.GetBoolean(rs, 30),
                     Remarks = DBHelper.GetString(rs, 31)
                 };
+                rs.Close();
                 return itemDetailData;
             }
+            rs.Close();
             return null;
         }
 

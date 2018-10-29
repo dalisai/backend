@@ -25,6 +25,7 @@ FROM branch";
                 };
                 branches.Add(branch);
             }
+            rs.Close();
             return branches;
         }
 
@@ -43,6 +44,7 @@ WHERE id = @ID";
                     Description = DBHelper.GetString(rs, 1)
                 };
             }
+            rs.Close();
             return branchData;
         }
 

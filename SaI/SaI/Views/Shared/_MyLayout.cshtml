@@ -837,7 +837,37 @@
             $('.timepicker').timepicker({
                 showInputs: false
             })
+
+            //Timepicker
+            $('.timepicker1').timepicker({
+                showInputs: false
+            })
         })
     </script>
-</body>
-</html>
+    <script type="text/javascript">
+        $(".numericOnly").bind('keypress', function (e) {
+            var num = new RegExp("^([0-9])$");
+            if (num.test(e.key)) {
+                return true;
+            }
+            return false;
+        });
+
+        $(".numericOnly").bind("paste", function (e) {
+            e.preventDefault();
+        });
+
+        $(".currency").bind('keypress', function (e) {
+            var num = new RegExp("^([0-9])$");
+            if (num.test(e.key) || e.keyCode == 46) {
+                return true;
+            }
+            return false;
+        });
+
+        $(".currency").bind("paste", function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body >
+</html >

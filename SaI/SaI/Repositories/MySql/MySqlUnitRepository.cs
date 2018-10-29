@@ -25,6 +25,7 @@ FROM unit";
                 };
                 units.Add(unit);
             }
+            rs.Close();
             return units;
         }
 
@@ -43,6 +44,7 @@ WHERE id = @ID";
                     Description = DBHelper.GetString(rs, 1)
                 };
             }
+            rs.Close();
             return unitData;
         }
 

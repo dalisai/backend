@@ -197,10 +197,12 @@ namespace SaI.Controllers
             viewModelData = new ItemViewModel() {
                 Item = item
             };
-            int x = itemRepository.SaveDetail(itemDetail);
-            if(x > 0) {
-                ModelState.Clear();
-                ViewData["success_message"] = "New item detail successfully saved.";
+            if (ModelState.IsValid) {
+                int x = itemRepository.SaveDetail(itemDetail);
+                if (x > 0) {
+                    ModelState.Clear();
+                    ViewData["success_message"] = "New item detail successfully saved.";
+                }
             }
             return View(viewModelData);
         }

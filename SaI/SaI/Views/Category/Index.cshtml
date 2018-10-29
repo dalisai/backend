@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 <section class="content">
+    <!-- SELECT2 EXAMPLE -->
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">List of Category</h3>
             <div class="box-tools">
-                <a class="btn btn-primary" href="/Category/Add"> Add Category </a><br /> <br /> &nbsp;
+                <button type="submit" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Add")'">Add Category</button>&nbsp;
             </div>
         </div>
         <div class="box">
@@ -20,24 +21,30 @@
                 <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-bordered table-striped dataTable" role="grid" id="example1" aria-describedby="example1_info">
+                            <table class="table table-bordered table-hover dataTable" role="grid" id="example1" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
+                                        <th>No.</th>
                                         <th>@Html.DisplayNameFor(model => model.Description)</th>
-                                        <th></th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model) {
-                                        <tr>
-                                            <td class="sorting_1">
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })&nbsp;
-                                                @Html.ActionLink(" Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger 	glyphicon glyphicon-trash" })
-                                            </td>
-                                        </tr>
+                                    @{
+                                        int number = 1;
+                                        foreach (var item in Model) {
+                                            <tr>
+                                                <td>@number</td>
+                                                <td class="sorting_1">
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("Edit", "Category", new { id = @item.ID})'"> Edit</button>&nbsp;
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Category", new { id = @item.ID})'"> Delete</button>
+                                                </td>
+                                            </tr>
+                                            number++;
+                                        }
                                     }
                                 </tbody>
                             </table>
@@ -49,9 +56,6 @@
         </div>
     </div>
 </section>
-
-
-
 
 
 

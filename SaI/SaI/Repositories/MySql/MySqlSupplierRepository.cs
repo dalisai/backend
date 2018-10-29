@@ -15,7 +15,7 @@ namespace SaI.Repositories.MySql
             string query = @"
 SELECT id, 
     description 
-FROM Supplier";
+FROM supplier";
             var rs = DBHelper.ExecuteReader(query, new SP());
             while (rs.Read()) {
                 var item = new Supplier {
@@ -33,7 +33,7 @@ FROM Supplier";
             string query = @"
 SELECT id, 
     description 
-FROM Supplier
+FROM supplier
 WHERE id = @ID";
             var rs = DBHelper.ExecuteReader(query, new SP("@ID", id));
             while (rs.Read()) {
@@ -51,7 +51,7 @@ WHERE id = @ID";
         public Boolean SaveSupplier(Supplier supplier) {
             try {
                 var query = string.Format(@"
-INSERT INTO Supplier(description) 
+INSERT INTO supplier(description) 
 VALUES (@Description)");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@Description", supplier.Description));
@@ -65,7 +65,7 @@ VALUES (@Description)");
         public Boolean UpdateSupplier(Supplier supplier) {
             try {
                 var query = string.Format(@"
-UPDATE Supplier 
+UPDATE supplier 
 SET Description = @Description
 Where ID = @ID");
                 DBHelper.ExecuteNonQuery(query,
@@ -80,11 +80,26 @@ Where ID = @ID");
         public Boolean RemoveSupplier(int id) {
             try {
                 var query = string.Format(@"
-DELETE FROM Supplier 
+DELETE FROM supplier 
 Where ID = @ID");
                 DBHelper.ExecuteNonQuery(query,
                     new SP("@ID", id));
                 return true;
+            }
+            catch (Exception ex) { }
+            return false;
+        }
+
+        public Boolean IsSupplierExist(string description) {
+            try {
+                var query = string.Format(@"
+Select * FROM supplier 
+Where description = @description");
+                var rs = DBHelper.ExecuteReader(query,
+                            new SP("@description", description));
+                if (rs.Read()) {
+                    return true;
+                }
             }
             catch (Exception ex) { }
             return false;

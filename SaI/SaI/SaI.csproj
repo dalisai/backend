@@ -150,6 +150,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -167,6 +169,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\ItemDetails.cs" />
     <Compile Include="Models\Units.cs" />
     <Compile Include="Models\Payment.cs" />
@@ -179,6 +183,8 @@
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MySql\MySqlCustomerRepository.cs" />
+    <Compile Include="Repositories\MySql\MySqlDiscountRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlUnitRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlPaymentRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlLocationRepository.cs" />
@@ -458,6 +464,14 @@
     <Content Include="Views\Supplier\Delete.cshtml" />
     <Content Include="Views\Supplier\Edit.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Discount\Index.cshtml" />
+    <Content Include="Views\Discount\Add.cshtml" />
+    <Content Include="Views\Discount\Edit.cshtml" />
+    <Content Include="Views\Discount\Delete.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Add.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Payment\Add.cshtml" />
     <Content Include="Views\Payment\Delete.cshtml" />
     <Content Include="Views\Payment\Edit.cshtml" />

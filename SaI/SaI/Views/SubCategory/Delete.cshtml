@@ -22,8 +22,8 @@
                         <label>@Html.DisplayNameFor(model => model.Description) :</label> @Html.DisplayFor(model => model.Description)
                     </div>
                         <div class="box-footer">
-                            <input type="submit" value="Delete" class="btn btn-danger" onclick="launch_toast()" />&nbsp;
-                            <input type="button" value="Cancel" onclick="location.href='@Url.Action("Index")'" class="btn btn-default" />
+                            <button type="submit" value="Delete" class="btn btn-danger">Delete</button>&nbsp;
+                            <button type="button" value="Cancel" onclick="location.href='@Url.Action("Index")'" class="btn btn-default">Cancel</button>
                         </div>
                 </div>
             </div>

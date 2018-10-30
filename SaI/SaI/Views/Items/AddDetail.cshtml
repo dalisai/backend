@@ -1,0 +1,239 @@
+﻿@model SaI.ViewModel.ItemViewModel
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+<form action="/items/AddDetail" method="post">
+    <section class="content">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Item Detail</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                @Html.HiddenFor(model => model.Item.ID)
+                @Html.HiddenFor(model => model.Item.ItemCode)
+                @Html.HiddenFor(model => model.Item.LargePacking)
+                @Html.HiddenFor(model => model.Item.LongDescription)
+                @Html.HiddenFor(model => model.Item.ShortDescription)
+                <div class="row">
+                    <div class="col-md-6">
+                        @*<div class="form-group">
+                            <label>Detail Code</label>
+                            @Html.EditorFor(model => model.ItemDetail.ItemDetailCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.ItemDetailCode, "", new { @class = "text-danger" })
+                        </div>*@
+                        <div class="form-group">
+                            <label>Stock No</label>
+                            @Html.EditorFor(model => model.ItemDetail.ItemDetailStockNo, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.ItemDetailStockNo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Unit ID</label>
+                            @Html.EditorFor(model => model.ItemDetail.UnitID, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.UnitID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Packing</label>
+                            @Html.EditorFor(model => model.ItemDetail.Packing, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Packing, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Ratio</label>
+                            @Html.EditorFor(model => model.ItemDetail.Ratio, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Ratio, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            @Html.EditorFor(model => model.ItemDetail.Stock, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Stock, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Maximum Inventory</label>
+                            @Html.EditorFor(model => model.ItemDetail.MaxInventory, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MaxInventory, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Inventory</label>
+                            @Html.EditorFor(model => model.ItemDetail.MinInventory, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MinInventory, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Begining Quantity</label>
+                            @Html.EditorFor(model => model.ItemDetail.BeginningQuantiy, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.BeginningQuantiy, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Post Date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.ItemDetail.PostDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepicker" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ItemDetail.PostDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>List Cost</label>
+                            @Html.EditorFor(model => model.ItemDetail.ListCost, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.ListCost, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Net Cost</label>
+                            @Html.EditorFor(model => model.ItemDetail.NetCost, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.NetCost, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @*<input class="form-control" id="datepicker" type="text" />*@
+                                @Html.EditorFor(model => model.ItemDetail.StartDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepicker1" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ItemDetail.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Start Time</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.ItemDetail.StartTime, new { htmlAttributes = new { @class = "form-control timepicker", @type = "text" } })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ItemDetail.StartTime, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(model => model.ItemDetail.NotActive) Not Active
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label>
+                                @Html.CheckBoxFor(model => model.ItemDetail.XItem) X-Item
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label>
+                                @Html.CheckBoxFor(model => model.ItemDetail.OpenDepartment) Open Department
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mark Up 1</label>
+                            @Html.EditorFor(model => model.ItemDetail.MarkUp1, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MarkUp1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Price 1</label>
+                            @Html.EditorFor(model => model.ItemDetail.Price1, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Price1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mark Up 2</label>
+                            @Html.EditorFor(model => model.ItemDetail.MarkUp2, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MarkUp2, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Price 2</label>
+                            @Html.EditorFor(model => model.ItemDetail.Price2, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Price2, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mark Up 3</label>
+                            @Html.EditorFor(model => model.ItemDetail.MarkUp3, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MarkUp3, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Price 3</label>
+                            @Html.EditorFor(model => model.ItemDetail.Price3, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Price3, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mark Up 4</label>
+                            @Html.EditorFor(model => model.ItemDetail.MarkUp4, new { htmlAttributes = new { @class = "form-control numericOnly" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.MarkUp4, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Price 4</label>
+                            @Html.EditorFor(model => model.ItemDetail.Price4, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Price4, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="form-group">
+                            <label>Last Update</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.ItemDetail.LastUpdate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepicker3" } })
+                                @Html.ValidationMessageFor(model => model.ItemDetail.LastUpdate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label>Discount Price</label>
+                            @Html.EditorFor(model => model.ItemDetail.DiscountPrice, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.DiscountPrice, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Discount Amount</label>
+                            @Html.EditorFor(model => model.ItemDetail.DiscountAmount, new { htmlAttributes = new { @class = "form-control currency" } })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.DiscountAmount, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Last Date SO</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.ItemDetail.LastDateSO, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepicker2" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ItemDetail.LastDateSO, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.ItemDetail.EndDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepicker4" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ItemDetail.EndDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>End Time</label>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.ItemDetail.EndTime, new { htmlAttributes = new { @class = "form-control timepicker1", @type = "text" } })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ItemDetail.EndTime, "", new { @class = "text-danger" })
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks</label>
+                            @Html.TextAreaFor(model => model.ItemDetail.Remarks, new { @class = "form-control", @rows = "3" })
+                            @Html.ValidationMessageFor(model => model.ItemDetail.Remarks, "", new { @class = "text-danger"})
+                        </div>  
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="box-footer">  
+                    @*Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+                        the plugin.*@
+                    <button type="submit" class="btn btn-primary">Add</button>&nbsp;
+                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("EditItem", "Items", new { id = Model.Item.ID })'">Cancel</button>
+                    <!-- /.box-body -->
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</form>
+}

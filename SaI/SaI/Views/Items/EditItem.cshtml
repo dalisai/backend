@@ -3,7 +3,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-<form action="/items/AddItem" method="post">
+<form action="/items/EditItem" method="post">
     <section class="content">
         <!-- SELECT2 EXAMPLE -->
         <div class="box box-primary">
@@ -12,6 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                @Html.HiddenFor(model => model.Item.ID)
                 <div class="form-group">
                     <label>Long Description</label>
                     @Html.EditorFor(model => model.Item.LongDescription, new { htmlAttributes = new { @class = "form-control" } })
@@ -24,27 +25,26 @@
                 </div>
                 <div class="form-group">
                     <label>Department Name</label>
-                    @Html.DropDownListFor(model => model.Item.DepartmentID, new SelectList(Model.DepartmentList, "ID", "Description"), new { @class = "form-control select2", @style = "width:100%" })
+                    @Html.DropDownListFor(model => model.Item.DepartmentID, new SelectList(Model.DepartmentList, "ID", "Description", Model.Item.DepartmentID), new { @class = "form-control select2" })
                 </div>
                 <div class="form-group">
                     <label>Category Name</label>
-                    @Html.DropDownListFor(model => model.Item.CategoryID, new SelectList(Model.CategoryList, "ID", "Description"), new { @class = "form-control select2", @style = "width:100%" })
+                    @Html.DropDownListFor(model => model.Item.CategoryID, new SelectList(Model.CategoryList, "ID", "Description", Model.Item.CategoryID), new { @class = "form-control select2" })
                 </div>
                 <div class="form-group">
                     <label>Sub-Category Name</label>
-                    @Html.DropDownListFor(model => model.Item.SubCategoryID, new SelectList(Model.SubCategoryList, "ID", "Description"), new { @class = "form-control select2", @style = "width:100%" })
+                    @Html.DropDownListFor(model => model.Item.SubCategoryID, new SelectList(Model.SubCategoryList, "ID", "Description", Model.Item.SubCategoryID), new { @class = "form-control select2" })
                 </div>
                 <div class="form-group">
                     <label>Supplier Name</label>
-                    @Html.DropDownListFor(model => model.Item.SupplierID, new SelectList(Model.SupplierList, "ID", "Description"), new { @class = "form-control select2", @style = "width:100%" })
+                    @Html.DropDownListFor(model => model.Item.SupplierID, new SelectList(Model.SupplierList, "ID", "Description", Model.Item.SupplierID), new { @class = "form-control select2" })
                 </div>
                 <div class="form-group">
                     <label>Large Packing</label>
-                    @Html.DropDownListFor(model => model.Item.LargePacking, new SelectList(Model.UnitList, "Description", "Description"), new { @class = "form-control select2", @style = "width:100%" })
+                    @Html.DropDownListFor(model => model.Item.LargePacking, new SelectList(Model.UnitList, "Description", "Description", Model.Item.LargePacking), new { @class = "form-control select2" })
                 </div>
                 <div class="checkbox">
                     <label>
-                        @*<input type="checkbox" />Vatable*@
                         @Html.CheckBoxFor(model => model.Item.IsVatable) Vatable
                     </label>&nbsp;&nbsp;
                     <label>
@@ -64,20 +64,22 @@
                 <div class="box-footer">
                     @*Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
                         the plugin.*@
-                    <button type="submit" class="btn btn-primary">Add</button>&nbsp;
+                    <button type="submit" class="btn btn-primary">Update</button>&nbsp;
                     <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Items")'">Cancel</button>
                     <!-- /.box-body -->
                 </div>
             </div>
         </div>
     </section>
-    @*
     <section class="content">
         <!-- SELECT2 EXAMPLE -->
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Item Details</h3>
                 <div class="box-tools">
+                    @*@{
+                            var disabled = ViewData["success_message"] == null ? "btn-block btn-default disabled" : "btn-primary";
+                        }*@
                     <a class="btn btn-primary pull-right" href="/Items/AddDetail/@Model.Item.ID"> Add Detail </a><br /> <br /> &nbsp;
                 </div>
             </div>
@@ -118,7 +120,9 @@
                                                         <td>@itemDetail.MinInventory</td>
                                                         <td>@itemDetail.BeginningQuantiy</td>
                                                         <td>
+                                                            @*<input type="button" class="btn btn-warning glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditDetail", "Items", new { itemID = Model.Item.ID, detailID = itemDetail.ID })'" value="Edit"/>*@
                                                             <button type="button" class="btn btn-warning glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditDetail", "Items", new { itemID = Model.Item.ID, detailID = itemDetail.ID })'"> Edit</button>&nbsp;
+                                                            @*<input type="button" class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("DeleteDetail", "Items", new { ID = itemDetail.ID })'" value="Delete" />*@
                                                             <button type="button" class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("DeleteDetail", "Items", new { itemID = Model.Item.ID, detailID = itemDetail.ID })'"> Delete</button>
                                                         </td>
                                                     </tr>
@@ -135,6 +139,5 @@
             </div>
         </div>
     </section>
-        *@
 </form>
 }

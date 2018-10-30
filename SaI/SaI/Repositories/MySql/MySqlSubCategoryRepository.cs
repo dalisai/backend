@@ -24,6 +24,7 @@ FROM subcategory";
                 };
                 list.Add(item);
             }
+            rs.Close();
             return list;
         }
 
@@ -39,8 +40,10 @@ WHERE id = @ID";
                     ID = DBHelper.GetInt32(rs, 0),
                     Description = DBHelper.GetString(rs, 1),
                 };
+                rs.Close();
                 return item;
             }
+            rs.Close();
             return null;
         }
 

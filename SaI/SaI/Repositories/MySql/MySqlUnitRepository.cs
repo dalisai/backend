@@ -8,68 +8,68 @@ using SP = MySql.Data.MySqlClient.MySqlParameter;
 
 namespace SaI.Repositories.MySql
 {
-    public class MySqlBranchRepository
+    public class MySqlUnitRepository
     {
-        public List<Branch> FindBranch()
+        public List<Unit> FindUnits()
         {
-            var branches = new List<Branch>();
+            var units = new List<Unit>();
             string query = @"
 SELECT ID, 
     Description 
-FROM branch";
+FROM unit";
             var rs = DBHelper.ExecuteReader(query);
             while (rs.Read()) {
-                var branch = new Branch {
+                var unit = new Unit {
                     ID = DBHelper.GetInt32(rs, 0),
                     Description = DBHelper.GetString(rs, 1)
                 };
-                branches.Add(branch);
+                units.Add(unit);
             }
             rs.Close();
-            return branches;
+            return units;
         }
 
-        public Branch GetBranch(int id)
+        public Unit GetUnit(int id)
         {
-            Branch branchData = new Branch();
+            Unit unitData = new Unit();
             string query = @"
 SELECT ID, 
     Description 
-FROM branch 
+FROM unit 
 WHERE id = @ID";
             var rs = DBHelper.ExecuteReader(query, new SP("@ID", id));
             while (rs.Read()) {
-                branchData = new Branch {
+                unitData = new Unit {
                     ID = DBHelper.GetInt32(rs, 0),
                     Description = DBHelper.GetString(rs, 1)
                 };
             }
             rs.Close();
-            return branchData;
+            return unitData;
         }
 
-        public bool SaveBranch(string description)
+        public bool SaveUnit(string description)
         {
             string query = @"
-INSERT INTO branch (Description) 
+INSERT INTO unit (Description) 
 VALUES (@Description)";
             DBHelper.ExecuteNonQuery(query, new SP("@Description", description));
             return true;
         }
 
-        public bool UpdateBranch(int id, string description)
+        public bool UpdateUnit(int id, string description)
         {
             string query = @"
-UPDATE branch SET Description = @Description 
+UPDATE unit SET Description = @Description 
 WHERE id = @ID";
             DBHelper.ExecuteNonQuery(query, new SP("@Description", description), new SP("@ID", id));
             return true;
         }
 
-        public bool RemoveBranch(int? id)
+        public bool RemoveUnit(int? id)
         {
             string query = @"
-DELETE FROM branch 
+DELETE FROM unit 
 WHERE id = @ID";
             DBHelper.ExecuteNonQuery(query, new SP("@ID", id));
             return true;

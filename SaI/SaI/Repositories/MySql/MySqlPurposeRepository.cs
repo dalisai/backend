@@ -25,6 +25,7 @@ FROM purpose";
                 };
                 purposes.Add(purpose);
             }
+            rs.Close();
             return purposes;
         }
 
@@ -43,6 +44,7 @@ WHERE id = @ID";
                     Description = DBHelper.GetString(rs, 1)
                 };
             }
+            rs.Close();
             return purposeData;
         }
 

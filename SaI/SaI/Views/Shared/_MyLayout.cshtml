@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="~/Content/plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="~/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="~/Content/bower_components/select2/dist/css/select2.min.css">
@@ -35,6 +37,10 @@
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
     <link rel="stylesheet" href="~/Content/toast/toastr.min.css" />
+
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="~/Content/plugins/iCheck/all.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -409,6 +415,12 @@
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="/Unit" onclick="location.href='@Url.Action("Index", "Unit")'">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                            <span>Unit</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="/Branch" onclick="location.href='@Url.Action("Index", "Branch")'">
                             <i class="fa fa-bell-o"></i>
                             <span>Branch</span>
@@ -721,7 +733,7 @@
     <script src="~/Content/bower_components/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-  $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.7 -->
     <script src="~/Content/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -735,11 +747,6 @@
     <script src="~/Content/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="~/Content/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="~/Content/bower_components/moment/min/moment.min.js"></script>
-    <script src="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="~/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Slimscroll -->
@@ -784,6 +791,17 @@
                 })
             })
     </script>
+    <!-- daterangepicker -->
+    <script src="~/Content/bower_components/moment/min/moment.min.js"></script>
+    <script src="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- InputMask -->
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- datepicker -->
+    <script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="~/Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="~/Content/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="~/Content/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 
@@ -793,13 +811,67 @@
             //Initialize Select2 Elements
             $('.select2').select2()
             $('.my-colorpicker1').colorpicker()
+
+            //Date picker
             $('#datepicker').datepicker({
                 autoclose: true
             })
+
+            //Date picker 1
+            $('#datepicker1').datepicker({
+                autoclose: true
+            })
+
+            //Date picker 2
             $('#datepicker2').datepicker({
                 autoclose: true
             })
+
+            //Date picker 3
+            $('#datepicker3').datepicker({
+                autoclose: true
+            })
+
+            //Date picker 4
+            $('#datepicker4').datepicker({
+                autoclose: true
+            })
+
+            //Timepicker
+            $('.timepicker').timepicker({
+                showInputs: false
+            })
+
+            //Timepicker
+            $('.timepicker1').timepicker({
+                showInputs: false
+            })
         })
     </script>
-</body>
-</html>
+    <script type="text/javascript">
+        $(".numericOnly").bind('keypress', function (e) {
+            var num = new RegExp("^([0-9])$");
+            if (num.test(e.key)) {
+                return true;
+            }
+            return false;
+        });
+
+        $(".numericOnly").bind("paste", function (e) {
+            e.preventDefault();
+        });
+
+        $(".currency").bind('keypress', function (e) {
+            var num = new RegExp("^([0-9])$");
+            if (num.test(e.key) || e.keyCode == 46) {
+                return true;
+            }
+            return false;
+        });
+
+        $(".currency").bind("paste", function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body >
+</html >

@@ -25,7 +25,7 @@
                                         <th>Long Description</th>
                                         <th>Short Description</th>
                                         <th>Large Packing</th>
-                                        <th class="text-center">Remarks</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +35,10 @@
                                             <td>@item.LongDescription</td>
                                             <td>@item.ShortDescription</td>
                                             <td>@item.LargePacking</td>
-                                            <td class="text-center"><button class="btn btn-info">Edit</button></td>
+                                            <td>
+                                                <button class="btn btn-warning glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditItem", "Items", new { id = @item.ID })'"> Edit</button>&nbsp;
+                                                <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("DeleteItem", "Items", new { id = @item.ID })'"> Delete</button>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

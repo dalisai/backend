@@ -330,18 +330,18 @@ CREATE TABLE `eod` (
 --
 
 CREATE TABLE `item_details` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemcode` varchar(45) NOT NULL,
   `stockno` varchar(45) DEFAULT NULL,
   `unitid` int(11) DEFAULT NULL,
-  `packing` int(11) DEFAULT NULL,
+  `packing` varchar(50) DEFAULT NULL,
   `ratio` int(11) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `max_inventory` int(11) DEFAULT NULL,
   `min_inventory` int(11) DEFAULT NULL,
   `beg_quantity` int(11) DEFAULT NULL,
   `postdate` date DEFAULT NULL,
-  `listcost` int(11) DEFAULT NULL,
+  `listcost` decimal(20,2) DEFAULT NULL,
   `netcost` decimal(20,2) DEFAULT NULL,
   `markup1` float DEFAULT NULL,
   `price1` decimal(20,2) DEFAULT NULL,
@@ -353,16 +353,17 @@ CREATE TABLE `item_details` (
   `price4` decimal(20,2) DEFAULT NULL,
   `lastupdate` datetime DEFAULT NULL,
   `discountp` int(11) DEFAULT NULL,
-  `discounta` int(11) DEFAULT NULL,
+  `discounta` decimal(20,2) DEFAULT NULL,
   `sdate` date DEFAULT NULL,
-  `stime` date DEFAULT NULL,
+  `stime` time(6) DEFAULT NULL,
   `edate` date DEFAULT NULL,
-  `etime` date DEFAULT NULL,
+  `etime` time(6) DEFAULT NULL,
   `lastdateso` date DEFAULT NULL,
   `notactive` int(11) DEFAULT NULL,
   `xitem` int(11) DEFAULT NULL,
   `opendept` int(11) DEFAULT NULL,
-  `remarks` varchar(45) DEFAULT NULL
+  `remarks` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -862,12 +863,6 @@ ALTER TABLE `eod`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `item_details`
---
-ALTER TABLE `item_details`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -1030,11 +1025,7 @@ ALTER TABLE `entertainer`
 --
 ALTER TABLE `eod`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `item_details`
---
-ALTER TABLE `item_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `items`
 --

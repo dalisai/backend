@@ -65,9 +65,9 @@
                                             <td>@item.Points</td>
                                             <td>@item.LastVisit</td>
                                             <td>@item.Photo</td>
-                                            <td>
-                                                <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Customer", new { id = @item.ID})'">Edit</button>&nbsp;
-                                                <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Customer", new { id = @item.ID})'">Delete</button>
+                                            <td class="col-sm-4">
+                                                <button class="btn btn-primary glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("Edit", "Customer", new { id = @item.ID})'"> Edit</button>&nbsp;
+                                                <button class="btn btn-danger glyphicon glyphicon-trash" onclick="location.href='@Url.Action("Delete", "Customer", new { id = @item.ID})'"> Delete</button>
                                             </td>
                                         </tr>
                                     }

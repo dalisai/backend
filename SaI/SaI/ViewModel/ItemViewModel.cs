@@ -17,5 +17,6 @@ namespace SaI.ViewModel
         public List<ItemDetail> ItemDetailList { get; set; }
         public ItemDetail ItemDetail { get; set; }
         public List<Position> PositionList { get; set; }
+        public List<Module> ModuleList { get; set; }
     }
 }

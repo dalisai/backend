@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\ItemDetails.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Units.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Location.cs" />
@@ -183,6 +185,7 @@
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MySql\MySqlPositionRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlCustomerRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlDiscountRepository.cs" />
     <Compile Include="Repositories\MySql\MySqlUnitRepository.cs" />
@@ -493,6 +496,10 @@
     <Content Include="Views\Items\EditDetail.cshtml" />
     <Content Include="Views\Items\DeleteItem.cshtml" />
     <Content Include="Views\Items\DeleteDetail.cshtml" />
+    <Content Include="Views\Position\Add.cshtml" />
+    <Content Include="Views\Position\Delete.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

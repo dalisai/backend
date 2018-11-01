@@ -37,8 +37,14 @@ namespace SaI.Controllers
                 bool exist = supplierRepo.IsSupplierExist(supplier.Description);
                 if (exist == false) {
                     if (ModelState.IsValid) {
-                        supplierRepo.SaveSupplier(supplier);
-                        ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
+                        var addsupplier = supplierRepo.SaveSupplier(supplier);
+                        if (addsupplier == true) {
+                            ModelState.Clear();
+                            ViewData["success_message"] = "You successfully created" + " " + supplier.Description + " " + "supplier.";
+                        }
+                        else {
+                            ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "supplier.";
+                        }
                     }
                 }
                 else {
@@ -48,7 +54,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + supplier.Description + " " + "supplier.";
             }
-            return Redirect(Request.Url.AbsoluteUri);
+            return View();
         }
 
         // GET: Supplier/Edit/5

@@ -38,8 +38,14 @@ namespace SaI.Controllers
                 bool exist = subcategoryRepo.IsSubCategoryExist(subCategory.Description);
                 if (exist == false) {
                     if (ModelState.IsValid) {
-                        subcategoryRepo.SaveSubCategory(subCategory);
-                        ViewData["success_message"] = "You successfully created" + " " + subCategory.Description + " " + "subCategory.";
+                        var addsubcategory = subcategoryRepo.SaveSubCategory(subCategory);
+                        if (addsubcategory == true) {
+                            ModelState.Clear();
+                            ViewData["success_message"] = "You successfully created" + " " + subCategory.Description + " " + "subCategory.";
+                        }
+                        else {
+                            ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
+                        }
                     }
                 }
                 else {
@@ -49,7 +55,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + subCategory.Description + " " + "subCategory.";
             }
-            return Redirect(Request.Url.AbsoluteUri);
+            return View();
         }
 
         // GET: Subcategory/Edit/5

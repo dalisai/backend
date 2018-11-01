@@ -39,8 +39,14 @@ namespace SaI.Controllers
                 bool exist = categoryRepo.IsCategoryExist(category.Description);
                 if (exist == false) {
                     if (ModelState.IsValid) {
-                        categoryRepo.SaveCategory(category);
-                        ViewData["success_message"] = "You successfully created" + " " + category.Description + " " + "category.";
+                       var addcategory = categoryRepo.SaveCategory(category);
+                        if (addcategory == true) {
+                            ModelState.Clear();
+                            ViewData["success_message"] = "You successfully created" + " " + category.Description + " " + "category.";
+                        }
+                        else {
+                            ViewData["error_message"] = "You unsuccessfully created" + " " + category.Description + " " + "category.";
+                        }
                     }
                 }
                 else {
@@ -50,7 +56,7 @@ namespace SaI.Controllers
             else {
                 ViewData["error_message"] = "You unsuccessfully created" + " " + category.Description + " " + "category.";
             }
-            return Redirect(Request.Url.AbsoluteUri);
+            return View();
         }
 
         // GET: Category/Edit/5
